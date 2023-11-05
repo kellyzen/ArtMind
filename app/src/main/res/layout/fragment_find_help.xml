@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FindHelpFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_help_title"
+            style="@style/TitleText"/>
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/login_countrycode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:ccp_showFlag="true"
+            app:ccp_showNameCode="true"
+            app:ccp_showFullName="true"
+            app:ccp_showPhoneCode="false"
+            app:ccp_defaultNameCode="my"/>
+    </LinearLayout>
+
+</FrameLayout>

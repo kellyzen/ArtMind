@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">ArtMind</string>
+    <string name="enter_mobile">Enter mobile number:</string>
+    <string name="mobile">Mobile</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="enter_otp">Enter OTP:</string>
+    <string name="otp">OTP</string>
+    <string name="next">Next</string>
+    <string name="resend_otp">Resend OTP in 30s</string>
+    <string name="resend_otp2">Resend OTP in </string>
+    <string name="resend_otp_click">Resend OTP</string>
+    <string name="enter_username">Enter Username:</string>
+    <string name="username">Username</string>
+    <string name="login_signin">Login/ Sign in</string>
+    <string name="timer_title">Timer</string>
+    <string name="find_help_title">Find Help</string>
+    <string name="scan_title">Scan</string>
+    <string name="history_title">History</string>
+    <string name="result_title">Result</string>
+    <string name="user_title">Profile</string>
+    <string name="about_title">About</string>
+    <string name="about">Lorem ipsum dolor sit amet consectetur.
+        Vulputate gravida amet vestibulum turpis.
+        Quisque dui malesuada lobortis risus cras ultricies sed varius lectus.
+        Nulla tincidunt nam nec at hac sapien porta nibh dignissim.
+        Elit est montes vel quam consectetur.
+        Pulvinar commodo sit elementum fringilla libero rhoncus.
+    </string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

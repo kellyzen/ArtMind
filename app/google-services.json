@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "46404892208",
+    "project_id": "artmind-20310184",
+    "storage_bucket": "artmind-20310184.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46404892208:android:0b086aa30c2a06c30f1ff5",
+        "android_client_info": {
+          "package_name": "com.example.artmind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCllvaMPDH5gZ_Fsy3FF_gqhjdieKoAVok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

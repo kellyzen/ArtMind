@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ArtMind</string>
+    <string name="enter_mobile">Masukkan Nombor Telefon Bimbit:</string>
+    <string name="mobile">Nombor Telefon Bimbit</string>
+    <string name="send_otp">Hantar OTP</string>
+    <string name="enter_otp">Masukkan OTP:</string>
+    <string name="otp">OTP</string>
+    <string name="next">Seterusnya</string>
+    <string name="resend_otp">Hantar Sekali OTP dalam 30s</string>
+    <string name="resend_otp2">Hantar Sekali OTP dalam </string>
+    <string name="resend_otp_click">Hantar Sekali OTP</string>
+    <string name="enter_username">Masukkan Pengguna Tukarnama:</string>
+    <string name="username">Pengguna Tukarnama</string>
+    <string name="login_signin">Log/ Daftar Masuk</string>
+    <string name="timer_title">Pemasa</string>
+    <string name="find_help_title">Cari Bantuan</string>
+    <string name="scan_title">Imbas</string>
+    <string name="history_title">Sejarah</string>
+    <string name="result_title">Keputusan</string>
+    <string name="user_title">Profil</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ArtMind</string>
+    <string name="enter_mobile">输入手机号码:</string>
+    <string name="mobile">手机号码</string>
+    <string name="send_otp">发送一次性密码</string>
+    <string name="enter_otp">输入一次性密码</string>
+    <string name="otp">一次性密码</string>
+    <string name="next">下一个</string>
+    <string name="resend_otp">重发一次性密码 30s</string>
+    <string name="resend_otp2">重发一次性密码 </string>
+    <string name="resend_otp_click">重发一次性密码</string>
+    <string name="enter_username">输入用户名</string>
+    <string name="username">用户名</string>
+    <string name="login_signin">登入账号</string>
+    <string name="timer_title">计时</string>
+    <string name="find_help_title">寻求帮助</string>
+    <string name="scan_title">扫描</string>
+    <string name="history_title">记录</string>
+    <string name="result_title">结果</string>
+    <string name="user_title">用户资料</string>
+</resources>
