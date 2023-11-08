@@ -5,10 +5,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +13,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.artmind.utils.AndroidUtil;
 
 import java.util.Locale;
 
@@ -57,13 +57,13 @@ public class TimerFragment extends Fragment {
         mButtonSet.setOnClickListener(v -> {
             String input = mEditTextInput.getText().toString();
             if (input.length() == 0) {
-                Toast.makeText(getActivity(), "Field can't be empty", Toast.LENGTH_SHORT).show();
+                AndroidUtil.showToast(getActivity(), "Field can't be empty");
                 return;
             }
 
             long millisInput = Long.parseLong(input) * 60000;
             if (millisInput == 0) {
-                Toast.makeText(getActivity(), "Please enter a positive number", Toast.LENGTH_SHORT).show();
+                AndroidUtil.showToast(getActivity(), "Please enter a positive number");
                 return;
             }
 

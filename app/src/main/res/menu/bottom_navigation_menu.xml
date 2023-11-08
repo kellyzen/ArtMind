@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/menu_timer"
-        android:icon="@drawable/home_icon"
+        android:icon="@drawable/timer_icon"
         android:title="@string/timer_title" />
     <item
         android:id="@+id/menu_help"
@@ -15,10 +15,10 @@
         android:title="@string/scan_title" />
     <item
         android:id="@+id/menu_history"
-        android:icon="@drawable/save_icon"
+        android:icon="@drawable/history_icon"
         android:title="@string/history_title" />
     <item
         android:id="@+id/menu_setting"
-        android:icon="@drawable/user_icon"
+        android:icon="@drawable/setting_icon"
         android:title="@string/setting_title" />
 </menu>

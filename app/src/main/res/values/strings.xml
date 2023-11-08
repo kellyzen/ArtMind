@@ -15,6 +15,7 @@
     <string name="username">Username</string>
     <string name="username2">Username:</string>
     <string name="user_ex">user</string>
+    <string name="minutes">Minutes</string>
 
     <!--Buttons-->
     <string name="send_otp">Send OTP</string>
@@ -24,6 +25,9 @@
     <string name="resend_otp_click">Resend OTP</string>
     <string name="update">Update</string>
     <string name="save">Save</string>
+    <string name="set">Set</string>
+    <string name="reset">Reset</string>
+    <string name="start">Start</string>
 
     <!--Titles-->
     <string name="timer_title">Timer</string>
@@ -36,12 +40,12 @@
     <string name="setting_title">Setting</string>
     <string name="user_manual_title">User Manual</string>
 
-    <!--Long string-->
-    <string name="about">Lorem ipsum dolor sit amet consectetur.
-        Vulputate gravida amet vestibulum turpis.
-        Quisque dui malesuada lobortis risus cras ultricies sed varius lectus.
-        Nulla tincidunt nam nec at hac sapien porta nibh dignissim.
-        Elit est montes vel quam consectetur.
-        Pulvinar commodo sit elementum fringilla libero rhoncus.
+    <!--Others-->
+    <string name="about_content">The goal of ArtMind is to enhance individuals\' self-awareness regarding their mental well-being, fostering a deeper understanding of their emotional states.
+        It is not only designed for individuals but also for parents or educators.
+        By identifying their mental state through creative expression, individuals can make informed decisions and access support from mental health centre through ArtMind.
     </string>
+    <string name="prof_pic">Click image to change profile pic</string>
+    <string name="timer_content">Focus on your drawing to ease your mind of anxieties with the help of this timer!</string>
+
 </resources>
