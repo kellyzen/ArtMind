@@ -1,22 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Nama App-->
     <string name="app_name">ArtMind</string>
+
+    <!--Teks Input-->
     <string name="enter_mobile">Masukkan Nombor Telefon Bimbit:</string>
     <string name="mobile">Nombor Telefon Bimbit</string>
-    <string name="send_otp">Hantar OTP</string>
+    <string name="mobile2">Nombor Telefon Bimbit:</string>
+    <string name="mobile_num_ex">+601x-xxxxxxx</string>
     <string name="enter_otp">Masukkan OTP:</string>
     <string name="otp">OTP</string>
-    <string name="next">Seterusnya</string>
     <string name="resend_otp">Hantar Sekali OTP dalam 30s</string>
     <string name="resend_otp2">Hantar Sekali OTP dalam </string>
-    <string name="resend_otp_click">Hantar Sekali OTP</string>
     <string name="enter_username">Masukkan Pengguna Tukarnama:</string>
     <string name="username">Pengguna Tukarnama</string>
+    <string name="username2">Pengguna Tukarnama:</string>
+    <string name="user_ex">pengguna</string>
+    <string name="minutes">Minit</string>
+
+    <!--Butang-->
+    <string name="send_otp">Hantar OTP</string>
     <string name="login_signin">Log/ Daftar Masuk</string>
+    <string name="logout">Log Keluar</string>
+    <string name="next">Seterusnya</string>
+    <string name="resend_otp_click">Hantar Sekali OTP</string>
+    <string name="update">Kemas Kini</string>
+    <string name="save">Simpan</string>
+    <string name="set">Tetap</string>
+    <string name="reset">Tetap Semula</string>
+    <string name="start">Mula</string>
+
+    <!--Tajuk-->
     <string name="timer_title">Pemasa</string>
     <string name="find_help_title">Cari Bantuan</string>
     <string name="scan_title">Imbas</string>
     <string name="history_title">Sejarah</string>
     <string name="result_title">Keputusan</string>
     <string name="user_title">Profil</string>
+    <string name="about_title">Tentang Kami</string>
+    <string name="setting_title">Tetapan</string>
+    <string name="user_manual_title">Manual Pengguna</string>
+
+    <!--Lain-lain-->
+    <string name="about_content">Matlamat ArtMind adalah untuk meningkatkan kesedaran diri individu berkenaan kesejahteraan mental mereka, memupuk pemahaman yang lebih mendalam tentang keadaan emosi mereka.
+        It is not only designed for individuals but also for parents or educators.
+        By identifying their mental state through creative expression, individuals can make informed decisions and access support from mental health centre through ArtMind.
+    </string>
+    <string name="prof_pic">Tekan gambar untuk tukar gambar profil</string>
+    <string name="find_help_website">klik untuk melawati laman web</string>
+    <string name="country_name_null">Tiada pusat bantuan ditemui untuk negara terpilih</string>
+    <string name="country_desc_null">Nantikan kemas kini :)</string>
+    <string name="timer_content">Fokus pada lukisan anda untuk meredakan kebimbangan anda dengan bantuan pemasa ini!</string>
 </resources>
