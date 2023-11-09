@@ -103,6 +103,8 @@
                 android:layout_height="wrap_content"
                 app:ccp_showFlag="false"
                 app:ccp_showNameCode="false"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_rememberLastSelection="true"
                 app:ccp_defaultNameCode="my"/>
 
             <EditText

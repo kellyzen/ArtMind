@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/help_centre_name"
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Help Centre Name"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/help_centre_title"
+            style="@style/NormalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Help Centre Title" />
+
+        <TextView
+            android:id="@+id/help_centre_contact"
+            style="@style/NormalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description" />
+
+        <TextView
+            android:id="@+id/website_redirect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_gravity="end"
+            android:text="@string/find_help_website" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

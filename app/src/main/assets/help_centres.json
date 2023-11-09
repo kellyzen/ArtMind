@@ -1,0 +1,188 @@
+{
+  "my": [
+    {
+      "name": "The Malaysian Mental Health Association (MMHA)",
+      "title": "Psychological Therapy & Support Services",
+      "website": "www.mmha.org.my/",
+      "contact": {
+        "phone": "+603 2780 6803 (Mon.-Fri. 9am-5pm, except public holidays)"
+      }
+    },
+    {
+      "name": "Talian Kasih 15999",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.kpwkm.gov.my",
+      "contact": {
+        "phone": "15999",
+        "whatsapp": "+60192615999"
+      }
+    },
+    {
+      "name": "The Befrienders* Klang Valley",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+603 7627 2929 (24 hours)",
+        "email": "sam@befrienders.org.my"
+      }
+    },
+    {
+      "name": "The Befrienders* Penang",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+604 2910 100",
+        "whatsapp": "+601156706261 (3pm – 12am midnight)",
+        "email": "pat@befpen.org"
+      }
+    },
+    {
+      "name": "The Befrienders* Ipoh",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+605 5477 933 or +605 5477 955 (1pm-10pm)",
+        "email": "befriendersipoh@gmail.com"
+      }
+    },
+    {
+      "name": "The Befrienders* Seremban",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+606 6321 772 or +606 6321 773",
+        "whatsapp": "+60189691772 (7pm-10pm)"
+      }
+    },
+    {
+      "name": "The Befrienders* Melaka",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+606 2250 791 (7pm – 12am midnight)"
+      }
+    },
+    {
+      "name": "The Befrienders* Muar",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+606 9520 313 or +606 9540 313 (8pm – 11pm)",
+        "email": "sam@befriendersmuar.org"
+      }
+    },
+    {
+      "name": "The Befrienders* Johor Bahru",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+607 331 2300",
+        "whatsapp": "+6073312300 (4pm-10pm)",
+        "email": "sam@befriendersjb.org"
+      }
+    },
+    {
+      "name": "The Befrienders* Kota Kinabalu",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+6088 255 788 or +6088 259 788",
+        "whatsapp": "+60168036945 (7pm-10pm)",
+        "email": "befrienderskk@gmail.com"
+      }
+    },
+    {
+      "name": "The Befrienders* Kuching",
+      "title": "24-hour Nationwide Helpline & Counselling",
+      "website": "www.befrienders.org.my/centre-in-malaysia",
+      "contact": {
+        "phone": "+6082 242 800 (6.30pm – 9pm)",
+        "email": "sam@befrienderskch.org.my"
+      }
+    }
+  ],
+  "in": [
+    {
+      "name": "Arpita Suicide Prevention Helpline",
+      "website": "www.arpitafoundation.org/",
+      "contact": {
+        "phone": "080-23655557 (10:00 AM - 01:00 PM | 02:00 PM - 05:00 PM | Monday to Friday)",
+        "email": "arpita.helpline@gmail.com"
+      }
+    },
+    {
+      "name": "Vandrevala Foundation",
+      "website": "www.vandrevalafoundation.com/",
+      "contact": {
+        "phone": "9999 666 555 (24x7 | All days of the week)",
+        "email": "help@vandrevalafoundation.com"
+      }
+    },
+    {
+      "name": "Parivarthan",
+      "title": "Parivarthan Counselling, Training and Research Centre",
+      "website": "www.parivarthan.org/",
+      "contact": {
+        "phone": "+91-7676602602 (1:00 PM - 10:00 PM | Monday to Friday)"
+      }
+    },
+    {
+      "name": "iCALL",
+      "title": "Free Telephone & Email based Counseling Services",
+      "website": "www.icallhelpline.org/",
+      "contact": {
+        "phone": "022-25521111, +91-9152987821 (08:00 AM - 10:00 PM | Monday to Saturday)",
+        "email": "icall@tiss.edu"
+      }
+    },
+    {
+      "name": "Sangath",
+      "title": "Healing Minds, Inspiring Lives",
+      "website": "www.sangath.in/",
+      "contact": {
+        "phone": "011-41198666 (10 AM -6 PM)",
+        "email": "contactus@sangath.in"
+      }
+    },
+    {
+      "name": "Voice That Cares (ROCF)",
+      "title": "Building a Mentally Resillient Nation",
+      "website": "www.rocf.org/voice-that-cares/",
+      "contact": {
+        "phone": "8448-8448-45 (9am-9pm | 7 days a week)",
+        "email": "info@rocf.org"
+      }
+    },
+    {
+      "name": "COOJ Mental Health Foundation (COOJ)",
+      "website": "www.cooj.co.in/",
+      "contact": {
+        "phone": "+91-8322252525 (01:00 PM - 07:00 PM | Monday to Friday)",
+        "email": "YouMatterByCooj@gmail.com"
+      }
+    },
+    {
+      "name": "Connecting Trust",
+      "website": "www.connectingngo.org",
+      "contact": {
+        "phone": "+91-9922001122, +91-9922004305 (12:00 PM - 08:00 PM | All days of the week)",
+        "email": "distressmailsconnecting@gmail.com"
+      }
+    },
+    {
+      "name": "Mann Talks",
+      "website": "www.manntalks.org",
+      "contact": {
+        "phone": "+91-8686139139 (09:00 AM - 06:00 PM | Monday to Sunday)"
+      }
+    },
+    {
+      "name": "Muktaa Helpline",
+      "website": "www.mentalhelpline.mcf.org.in/",
+      "contact": {
+        "phone": "788-788-9882 , 080-69267931 (12-8 PM | Monday-Saturday)",
+        "email": "contactus@mcf.org.in"
+      }
+    }
+  ]
+}
