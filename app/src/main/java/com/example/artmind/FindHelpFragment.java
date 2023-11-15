@@ -59,13 +59,7 @@ public class FindHelpFragment extends Fragment {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-
         return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
     }
 
     private void parseJSON() throws JSONException {

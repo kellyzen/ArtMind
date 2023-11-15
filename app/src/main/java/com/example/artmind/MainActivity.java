@@ -2,10 +2,12 @@ package com.example.artmind;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.artmind.model.SharedViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     ScanFragment scanFragment;
     HistoryFragment historyFragment;
     SettingFragment settingFragment;
+    SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         scanFragment = new ScanFragment();
         historyFragment = new HistoryFragment();
         settingFragment = new SettingFragment();
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
 
         //Bottom Navigation View
         bottomNavigationView = findViewById(R.id.bottom_navigation);
