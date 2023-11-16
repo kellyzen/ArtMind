@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="20"
-                android:contentDescription="Cropped Image"
+                android:contentDescription="Result Image"
                 android:src="@drawable/ic_launcher_background" />
 
             <LinearLayout

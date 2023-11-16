@@ -2,12 +2,15 @@ package com.example.artmind.model;
 
 import com.google.firebase.Timestamp;
 
+import java.util.List;
+
 public class UserModel {
     private String phone;
     private String username;
     private Timestamp createdTimestamp;
     private String userId;
     private String fcmToken;
+    private List<HistoryModel> historyModel;
 
     public UserModel() {
     }
@@ -57,5 +60,13 @@ public class UserModel {
 
     public void setFcmToken(String fcmToken) {
         this.fcmToken = fcmToken;
+    }
+
+    public List<HistoryModel> getHistoryModel() {
+        return historyModel;
+    }
+
+    public void setHistoryModel(List<HistoryModel> historyModel) {
+        this.historyModel = historyModel;
     }
 }

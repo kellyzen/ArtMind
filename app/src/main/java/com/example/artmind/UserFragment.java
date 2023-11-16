@@ -1,7 +1,6 @@
 package com.example.artmind;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,15 +17,10 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.artmind.model.UserModel;
 import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 public class UserFragment extends Fragment {
     ImageView profilePic;
@@ -46,11 +40,11 @@ public class UserFragment extends Fragment {
         super.onCreate(savedInstanceState);
         imagePickLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if(result.getResultCode() == Activity.RESULT_OK){
+                    if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        if(data!=null && data.getData()!=null){
+                        if (data != null && data.getData() != null) {
                             selectedImageUri = data.getData();
-                            setProfilePic(getContext(),selectedImageUri,profilePic);
+                            AndroidUtil.setRoundImage(getContext(), selectedImageUri, profilePic);
                         }
                     }
                 }
@@ -72,8 +66,8 @@ public class UserFragment extends Fragment {
 
         updateProfileBtn.setOnClickListener((v -> updateBtnClick()));
 
-        profilePic.setOnClickListener((v)->{
-            ImagePicker.with(this).cropSquare().compress(512).maxResultSize(512,512)
+        profilePic.setOnClickListener((v) -> {
+            ImagePicker.with(this).cropSquare().compress(512).maxResultSize(512, 512)
                     .createIntent(intent -> {
                         imagePickLauncher.launch(intent);
                         return null;
@@ -83,13 +77,9 @@ public class UserFragment extends Fragment {
         return view;
     }
 
-    void setProfilePic(Context context, Uri imageUri, ImageView imageView){
-        Glide.with(context).load(imageUri).apply(RequestOptions.circleCropTransform()).into(imageView);
-    }
-
     void updateBtnClick() {
         String newUsername = usernameInput.getText().toString();
-        if(newUsername.isEmpty() || newUsername.length()<3){
+        if (newUsername.isEmpty() || newUsername.length() < 3) {
             usernameInput.setError("Username length should be at least 3 chars");
             return;
         }
@@ -97,12 +87,12 @@ public class UserFragment extends Fragment {
         setInProgress(true);
 
 
-        if(selectedImageUri!=null){
+        if (selectedImageUri != null) {
             FirebaseUtil.getCurrentProfilePicStorageRef().putFile(selectedImageUri)
                     .addOnCompleteListener(task -> {
                         updateToFirestore();
                     });
-        }else{
+        } else {
             updateToFirestore();
         }
     }
@@ -125,9 +115,9 @@ public class UserFragment extends Fragment {
 
         FirebaseUtil.getCurrentProfilePicStorageRef().getDownloadUrl()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        Uri uri  = task.getResult();
-                        setProfilePic(getContext(),uri,profilePic);
+                    if (task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        AndroidUtil.setRoundImage(getContext(), uri, profilePic);
                     }
                 });
 

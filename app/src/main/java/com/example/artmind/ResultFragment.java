@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.artmind.model.ColorAnalysisModel;
+import com.example.artmind.model.HistoryModel;
 import com.example.artmind.model.SharedViewModel;
 import com.example.artmind.utils.AndroidUtil;
+import com.example.artmind.utils.FirebaseUtil;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +31,10 @@ public class ResultFragment extends Fragment {
     TextView resultDesc;
     ProgressBar resultProgress;
     SharedViewModel sharedViewModel;
+    String desc;
+    String category;
+    String color;
+    int percentage;
 
     public ResultFragment() {
     }
@@ -53,15 +59,15 @@ public class ResultFragment extends Fragment {
 //                    }
 //                });
 
-        //Load the selected crop image
+        // Load the selected crop image
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         loadImage();
 
-        //Set image description field with authorName | time | date
+        // Set image description field with authorName | time | date
         String authorName = getAuthorName();
         String time = getCurrentTime();
         String date = getCurrentDate();
-        String desc = authorName + " | " + time + " | " + date;
+        desc = authorName + " | " + time + " | " + date;
         resultDesc.setText(desc);
 
         return view;
@@ -81,14 +87,35 @@ public class ResultFragment extends Fragment {
     private void setResult(Uri uri) {
         ColorAnalysisModel model = new ColorAnalysisModel();
         model.analyzeImage(getActivity(), uri);
-        String category = model.getResultCategory();
-        String color = model.getResultColor();
-        int percentage = model.getResultPercentage();
+        category = model.getResultCategory();
+        color = model.getResultColor();
+        percentage = model.getResultPercentage();
 
         resultCategory.setText(category);
         resultPercentage.setText(percentage + "%");
         resultProgress.setProgress(percentage);
         AndroidUtil.showToast(getActivity(), color);// can delete
+
+        uploadImageToFirestore(uri);
+    }
+
+    private void uploadImageToFirestore(Uri uri) {
+        String fileName = uri.getLastPathSegment();
+        FirebaseUtil.getHistoryStorageRef().child(fileName).putFile(uri)
+                .addOnCompleteListener(task -> {
+
+                });
+        updateDetailsToFirestore(fileName);
+    }
+
+    private void updateDetailsToFirestore(String filePath) {
+        HistoryModel newHistory = new HistoryModel();
+        newHistory.setImagePath(filePath);
+        newHistory.setPercentage(percentage);
+        newHistory.setCategory(category);
+        newHistory.setDesc(desc);
+
+        FirebaseUtil.updateHistory(newHistory);
     }
 
     // Retrieve author's name from arguments

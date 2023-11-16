@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="50dp"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".HistoryFragment">
 
     <TextView
+        style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/history_title"
-        android:textSize="22sp"/>
+        android:text="@string/history_title" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/history_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:contentDescription="Cropped Image"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/history_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="category"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/history_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="percentage"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/history_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="desc"
+        android:textSize="18sp" />
+
+</LinearLayout>
