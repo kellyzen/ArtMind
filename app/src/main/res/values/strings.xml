@@ -31,7 +31,7 @@
     <string name="scan">Scan</string>
 
     <!--Titles-->
-    <string name="timer_title">Timer</string>
+    <string name="timer_title">Focus Timer</string>
     <string name="find_help_title">Find Help</string>
     <string name="scan_title">Scan</string>
     <string name="history_title">History</string>

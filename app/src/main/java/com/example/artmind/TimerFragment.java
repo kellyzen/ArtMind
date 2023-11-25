@@ -3,37 +3,56 @@ package com.example.artmind;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.example.artmind.utils.AndroidUtil;
 
 import java.util.Locale;
 
 public class TimerFragment extends Fragment {
-    private EditText mEditTextInput;
-    private TextView mTextViewCountDown;
-    private Button mButtonSet;
-    private Button mButtonStartPause;
-    private Button mButtonReset;
+    private EditText editTextInput;
+    private TextView textViewCountDown;
+    private Button buttonSet;
+    private Button buttonStartPause;
+    private Button buttonReset;
+    private ImageView timerImageView;
+    private CountDownTimer countDownTimer;
+    private boolean timerRunning;
+    private long startTimeInMillis;
+    private long timeLeftInMillis;
+    private long endTime;
+    private NotificationManagerCompat notificationManager;
+    private static final int NOTIFICATION_ID = 1;
+    TimerCompleteFragment timerCompleteFragment;
+    private final Handler handler = new Handler();
+    private Runnable timerRunnable;
+    private static final int PERMISSION_REQUEST_VIBRATE = 1;
 
-    private CountDownTimer mCountDownTimer;
-
-    private boolean mTimerRunning;
-    private long mStartTimeInMillis;
-    private long mTimeLeftInMillis;
-    private long mEndTime;
 
     public TimerFragment() {
     }
@@ -47,15 +66,23 @@ public class TimerFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        mEditTextInput = getView().findViewById(R.id.edit_text_input);
-        mTextViewCountDown = getView().findViewById(R.id.text_view_countdown);
+        editTextInput = getView().findViewById(R.id.edit_text_input);
+        textViewCountDown = getView().findViewById(R.id.text_view_countdown);
+        timerImageView = getView().findViewById(R.id.timer_image_view);
+        buttonSet = getView().findViewById(R.id.button_set);
+        buttonStartPause = getView().findViewById(R.id.button_start_pause);
+        buttonReset = getView().findViewById(R.id.button_reset);
 
-        mButtonSet = getView().findViewById(R.id.button_set);
-        mButtonStartPause = getView().findViewById(R.id.button_start_pause);
-        mButtonReset = getView().findViewById(R.id.button_reset);
+        Glide.with(getActivity()).load(R.drawable.drawing_frog).into(new DrawableImageViewTarget(timerImageView));
 
-        mButtonSet.setOnClickListener(v -> {
-            String input = mEditTextInput.getText().toString();
+        notificationManager = NotificationManagerCompat.from(getActivity());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("channel_id", "Channel Name", NotificationManager.IMPORTANCE_LOW);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        buttonSet.setOnClickListener(v -> {
+            String input = editTextInput.getText().toString();
             if (input.length() == 0) {
                 AndroidUtil.showToast(getActivity(), "Field can't be empty");
                 return;
@@ -68,63 +95,65 @@ public class TimerFragment extends Fragment {
             }
 
             setTime(millisInput);
-            mEditTextInput.setText("");
+            editTextInput.setText("");
         });
 
-        mButtonStartPause.setOnClickListener(v -> {
-            if (mTimerRunning) {
+        buttonStartPause.setOnClickListener(v -> {
+            if (timerRunning) {
                 pauseTimer();
             } else {
                 startTimer();
+                startNotificationTimer();
             }
         });
 
-        mButtonReset.setOnClickListener(v -> resetTimer());
+        buttonReset.setOnClickListener(v -> resetTimer());
     }
 
     private void setTime(long milliseconds) {
-        mStartTimeInMillis = milliseconds;
+        startTimeInMillis = milliseconds;
         resetTimer();
         closeKeyboard();
     }
 
     private void startTimer() {
-        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
+        endTime = System.currentTimeMillis() + timeLeftInMillis;
 
-        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
+                timeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
 
             @Override
             public void onFinish() {
-                mTimerRunning = false;
-                updateWatchInterface();
+                timerRunning = false;
+                updateTimerInterface();
             }
         }.start();
 
-        mTimerRunning = true;
-        updateWatchInterface();
+        timerRunning = true;
+        updateTimerInterface();
     }
 
     private void pauseTimer() {
-        mCountDownTimer.cancel();
-        mTimerRunning = false;
-        updateWatchInterface();
+        countDownTimer.cancel();
+        timerRunning = false;
+        updateTimerInterface();
+        notificationManager.cancel(NOTIFICATION_ID);
     }
 
     private void resetTimer() {
-        mTimeLeftInMillis = mStartTimeInMillis;
+        timeLeftInMillis = startTimeInMillis;
         updateCountDownText();
-        updateWatchInterface();
+        updateTimerInterface();
     }
 
     private void updateCountDownText() {
-        int hours = (int) (mTimeLeftInMillis / 1000) / 3600;
-        int minutes = (int) ((mTimeLeftInMillis / 1000) % 3600) / 60;
-        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        int hours = (int) (timeLeftInMillis / 1000) / 3600;
+        int minutes = (int) ((timeLeftInMillis / 1000) % 3600) / 60;
+        int seconds = (int) (timeLeftInMillis / 1000) % 60;
 
         String timeLeftFormatted;
         if (hours > 0) {
@@ -135,30 +164,32 @@ public class TimerFragment extends Fragment {
                     "%02d:%02d", minutes, seconds);
         }
 
-        mTextViewCountDown.setText(timeLeftFormatted);
+        textViewCountDown.setText(timeLeftFormatted);
     }
 
-    private void updateWatchInterface() {
-        if (mTimerRunning) {
-            mEditTextInput.setVisibility(View.INVISIBLE);
-            mButtonSet.setVisibility(View.INVISIBLE);
-            mButtonReset.setVisibility(View.INVISIBLE);
-            mButtonStartPause.setText("Pause");
+    private void updateTimerInterface() {
+        if (timerRunning) {
+            editTextInput.setVisibility(View.INVISIBLE);
+            buttonSet.setVisibility(View.INVISIBLE);
+            buttonReset.setVisibility(View.INVISIBLE);
+            buttonStartPause.setText("Pause");
         } else {
-            mEditTextInput.setVisibility(View.VISIBLE);
-            mButtonSet.setVisibility(View.VISIBLE);
-            mButtonStartPause.setText("Start");
+            editTextInput.setVisibility(View.VISIBLE);
+            buttonSet.setVisibility(View.VISIBLE);
+            buttonStartPause.setText("Start");
 
-            if (mTimeLeftInMillis < 1000) {
-                mButtonStartPause.setVisibility(View.INVISIBLE);
+            if (timeLeftInMillis < 1000) {
+                resetTimer();
+                timerCompleteFragment = new TimerCompleteFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, timerCompleteFragment).commit();
             } else {
-                mButtonStartPause.setVisibility(View.VISIBLE);
+                buttonStartPause.setVisibility(View.VISIBLE);
             }
 
-            if (mTimeLeftInMillis < mStartTimeInMillis) {
-                mButtonReset.setVisibility(View.VISIBLE);
+            if (timeLeftInMillis < startTimeInMillis) {
+                buttonReset.setVisibility(View.VISIBLE);
             } else {
-                mButtonReset.setVisibility(View.INVISIBLE);
+                buttonReset.setVisibility(View.INVISIBLE);
             }
         }
     }
@@ -171,6 +202,62 @@ public class TimerFragment extends Fragment {
         }
     }
 
+    private void startNotificationTimer() {
+        new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Update the notification with the remaining time
+                updateNotification((int) (millisUntilFinished / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                // Notification timer finished, perform additional actions here
+                showNotification("Timer Finished", "Your countdown timer has finished!");
+            }
+        }.start();
+    }
+
+    private void updateNotification(int secondsLeft) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "channel_id")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Timer Countdown")
+                .setContentText(String.format(Locale.getDefault(), "Time remaining: %d seconds", secondsLeft))
+                .setPriority(NotificationCompat.PRIORITY_LOW);
+
+        // Check if the app has the FOREGROUND_SERVICE permission
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.VIBRATE)
+                == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify(NOTIFICATION_ID, builder.build());
+        } else {
+            // Request the FOREGROUND_SERVICE permission if not granted
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.VIBRATE},
+                    123);
+        }
+    }
+
+    private void showNotification(String title, String content) {
+        // Create a notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "channel_id")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setPriority(NotificationCompat.PRIORITY_LOW);
+
+        // Check for permission before notifying
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
+            // Request the VIBRATE permission if not granted
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.VIBRATE}, PERMISSION_REQUEST_VIBRATE);
+            return;
+        }
+
+
+        // Notify using the notification manager
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();
@@ -178,15 +265,15 @@ public class TimerFragment extends Fragment {
         SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putLong("startTimeInMillis", mStartTimeInMillis);
-        editor.putLong("millisLeft", mTimeLeftInMillis);
-        editor.putBoolean("timerRunning", mTimerRunning);
-        editor.putLong("endTime", mEndTime);
+        editor.putLong("startTimeInMillis", startTimeInMillis);
+        editor.putLong("millisLeft", timeLeftInMillis);
+        editor.putBoolean("timerRunning", timerRunning);
+        editor.putLong("endTime", endTime);
 
         editor.apply();
 
-        if (mCountDownTimer != null) {
-            mCountDownTimer.cancel();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
         }
     }
 
@@ -196,22 +283,22 @@ public class TimerFragment extends Fragment {
 
         SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
 
-        mStartTimeInMillis = prefs.getLong("startTimeInMillis", 600000);
-        mTimeLeftInMillis = prefs.getLong("millisLeft", mStartTimeInMillis);
-        mTimerRunning = prefs.getBoolean("timerRunning", false);
+        startTimeInMillis = prefs.getLong("startTimeInMillis", 600000);
+        timeLeftInMillis = prefs.getLong("millisLeft", startTimeInMillis);
+        timerRunning = prefs.getBoolean("timerRunning", false);
 
         updateCountDownText();
-        updateWatchInterface();
+        updateTimerInterface();
 
-        if (mTimerRunning) {
-            mEndTime = prefs.getLong("endTime", 0);
-            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
+        if (timerRunning) {
+            endTime = prefs.getLong("endTime", 0);
+            timeLeftInMillis = endTime - System.currentTimeMillis();
 
-            if (mTimeLeftInMillis < 0) {
-                mTimeLeftInMillis = 0;
-                mTimerRunning = false;
+            if (timeLeftInMillis < 0) {
+                timeLeftInMillis = 0;
+                timerRunning = false;
                 updateCountDownText();
-                updateWatchInterface();
+                updateTimerInterface();
             } else {
                 startTimer();
             }
