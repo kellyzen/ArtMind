@@ -13,10 +13,6 @@ public class AndroidUtil {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-    public static void setImage(Context context, Uri imageUri, ImageView imageView){
-        Glide.with(context).load(imageUri).into(imageView);
-    }
-
     public static void setRoundImage(Context context, Uri imageUri, ImageView imageView){
         Glide.with(context).load(imageUri).apply(RequestOptions.circleCropTransform()).into(imageView);
     }

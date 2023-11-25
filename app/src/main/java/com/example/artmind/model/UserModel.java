@@ -10,16 +10,17 @@ public class UserModel {
     private Timestamp createdTimestamp;
     private String userId;
     private String fcmToken;
-    private List<HistoryModel> historyModel;
+    private List<HistoryModel> history;
 
     public UserModel() {
     }
 
-    public UserModel(String phone, String username, Timestamp createdTimestamp,String userId) {
+    public UserModel(String phone, String username, Timestamp createdTimestamp,String userId, List<HistoryModel> history) {
         this.phone = phone;
         this.username = username;
         this.createdTimestamp = createdTimestamp;
         this.userId = userId;
+        this.history = history;
     }
 
     public String getPhone() {
@@ -28,14 +29,6 @@ public class UserModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public Timestamp getCreatedTimestamp() {
@@ -62,11 +55,19 @@ public class UserModel {
         this.fcmToken = fcmToken;
     }
 
-    public List<HistoryModel> getHistoryModel() {
-        return historyModel;
+    public String getUsername() {
+        return username;
     }
 
-    public void setHistoryModel(List<HistoryModel> historyModel) {
-        this.historyModel = historyModel;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<HistoryModel> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<HistoryModel> history) {
+        this.history = history;
     }
 }

@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.artmind.model.ColorAnalysisModel;
 import com.example.artmind.model.HistoryModel;
 import com.example.artmind.model.SharedViewModel;
-import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +32,6 @@ public class ResultFragment extends Fragment {
     SharedViewModel sharedViewModel;
     String desc;
     String category;
-    String color;
     int percentage;
 
     public ResultFragment() {
@@ -88,23 +86,20 @@ public class ResultFragment extends Fragment {
         ColorAnalysisModel model = new ColorAnalysisModel();
         model.analyzeImage(getActivity(), uri);
         category = model.getResultCategory();
-        color = model.getResultColor();
         percentage = model.getResultPercentage();
 
         resultCategory.setText(category);
         resultPercentage.setText(percentage + "%");
         resultProgress.setProgress(percentage);
-        AndroidUtil.showToast(getActivity(), color);// can delete
 
         uploadImageToFirestore(uri);
     }
 
     private void uploadImageToFirestore(Uri uri) {
         String fileName = uri.getLastPathSegment();
-        FirebaseUtil.getHistoryStorageRef().child(fileName).putFile(uri)
-                .addOnCompleteListener(task -> {
+        FirebaseUtil.getHistoryStorageRef().child(fileName).putFile(uri).addOnCompleteListener(task -> {
 
-                });
+        });
         updateDetailsToFirestore(fileName);
     }
 

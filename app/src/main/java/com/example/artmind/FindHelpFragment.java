@@ -107,7 +107,6 @@ public class FindHelpFragment extends Fragment {
                 if (!whatsapp.equals("")) {
                     contact = contact + "\n" + "Whatsapp: " + whatsapp;
                 }
-//                contact = phone + "\n" + whatsapp + "\n" + email;
 
                 findHelpCardArrayList.add(new FindHelpCard(name, title, website, contact));
             }

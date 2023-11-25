@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.artmind.model.HistoryCallback;
 import com.example.artmind.model.HistoryModel;
+import com.example.artmind.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -86,6 +87,16 @@ public class FirebaseUtil {
                         HistoryModel historyModel = HistoryModel.fromMap(historyMap);
                         historyModels.add(historyModel);
                     }
+
+                    currentUserDetails().get().addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            UserModel userModel;
+                            userModel = task.getResult().toObject(UserModel.class);
+                            if (userModel != null) {
+                                userModel.setHistory(historyModels);
+                            }
+                        }
+                    });
                 }
             }
 
