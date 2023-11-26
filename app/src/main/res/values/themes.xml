@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.ArtMind" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <item name="android:windowBackground">@color/off_white</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:fontFamily">@font/spacegrotesk</item>
         <item name="fontFamily">@font/spacegrotesk</item>
     </style>

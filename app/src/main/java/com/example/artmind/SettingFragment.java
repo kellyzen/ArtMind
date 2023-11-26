@@ -23,6 +23,7 @@ public class SettingFragment extends Fragment {
     Button profileBtn;
     AboutFragment aboutFragment;
     UserFragment userFragment;
+    EthicalGuidelineFragment ethicalGuidelineFragment;
 
     public SettingFragment() {
     }
@@ -33,9 +34,11 @@ public class SettingFragment extends Fragment {
         //Navigation Buttons
         aboutFragment = new AboutFragment();
         userFragment = new UserFragment();
+        ethicalGuidelineFragment = new EthicalGuidelineFragment();
 
         aboutBtn = view.findViewById(R.id.menu_about);
         profileBtn = view.findViewById(R.id.menu_profile);
+        manualBtn = view.findViewById(R.id.menu_user_manual);
 
         aboutBtn.setOnClickListener((v)->{
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, aboutFragment).commit();
@@ -43,6 +46,10 @@ public class SettingFragment extends Fragment {
 
         profileBtn.setOnClickListener((v)->{
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, userFragment).commit();
+        });
+
+        manualBtn.setOnClickListener((v)->{
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ethicalGuidelineFragment).commit();
         });
 
         //Logout

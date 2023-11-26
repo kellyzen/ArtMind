@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="40dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".EthicalGuidelineFragment">
+
+    <TextView
+        style="@style/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:text="Ethical Guidelines" />
+
+    <LinearLayout
+        android:id="@+id/ellipses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="horizontal" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/guideline_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="User Guidelines" />
+
+</LinearLayout>

@@ -39,7 +39,17 @@
     <string name="user_title">Profile</string>
     <string name="about_title">About Us</string>
     <string name="setting_title">Setting</string>
-    <string name="user_manual_title">User Manual</string>
+    <string name="user_manual_title">Ethical Guidelines</string>
+
+    <!--Guidelines-->
+    <string name="guideline1">Important Note</string>
+    <string name="guideline2">Privacy Matters</string>
+    <string name="guideline3">Data Usage</string>
+    <string name="guideline4">Guideline Agreement</string>
+    <string name="desc1">ArtMind is meant to be a quick snapshot of your mental health. If your results indicate you may be experiencing symptoms of a mental illness, consider sharing your results with someone (such as a doctor or a therapist).</string>
+    <string name="desc2">Respect the privacy of others. Do not take screenshots or share any content without explicit consent. Everyone has the right to control the visibility of their creations and maintain a sense of security within the community.</string>
+    <string name="desc3">Your privacy matters to us. Rest assured that the data uploaded will not be utilized for any research purposes. We are committed to maintaining the confidentiality of your information.</string>
+    <string name="desc4">Using this app implies your agreement to follow our guidelines, fostering an ethical environment for everyone. Your adherence contributes to the well-being of the entire community.</string>
 
     <!--Others-->
     <string name="about_content">The goal of ArtMind is to enhance individuals\' self-awareness regarding their mental well-being, fostering a deeper understanding of their emotional states.
