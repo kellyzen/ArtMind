@@ -8,10 +8,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +47,12 @@ public class TimerFragment extends Fragment {
     private long timeLeftInMillis;
     private long endTime;
     private NotificationManagerCompat notificationManager;
-    private static final int NOTIFICATION_ID = 1;
     TimerCompleteFragment timerCompleteFragment;
-    private final Handler handler = new Handler();
-    private Runnable timerRunnable;
+    private MediaPlayer mediaPlayer;
+    private static final int NOTIFICATION_ID = 1;
     private static final int PERMISSION_REQUEST_VIBRATE = 1;
-
+    private boolean isMuted = false;
+    private boolean musicPaused = false;
 
     public TimerFragment() {
     }
@@ -104,10 +104,21 @@ public class TimerFragment extends Fragment {
             } else {
                 startTimer();
                 startNotificationTimer();
+                if (!isMuted) {
+                    startMusic();
+                }
             }
         });
 
-        buttonReset.setOnClickListener(v -> resetTimer());
+        buttonReset.setOnClickListener(v -> {
+            if (timerRunning) {
+                // If the timer is running, toggle mute/unmute
+                toggleMute();
+            } else {
+                // If the timer is not running, perform reset
+                resetTimer();
+            }
+        });
     }
 
     private void setTime(long milliseconds) {
@@ -142,6 +153,7 @@ public class TimerFragment extends Fragment {
         timerRunning = false;
         updateTimerInterface();
         notificationManager.cancel(NOTIFICATION_ID);
+        pauseMusic();
     }
 
     private void resetTimer() {
@@ -171,8 +183,13 @@ public class TimerFragment extends Fragment {
         if (timerRunning) {
             editTextInput.setVisibility(View.INVISIBLE);
             buttonSet.setVisibility(View.INVISIBLE);
-            buttonReset.setVisibility(View.INVISIBLE);
             buttonStartPause.setText("Pause");
+            buttonReset.setVisibility(View.VISIBLE);
+            if (isMuted) {
+                buttonReset.setText("Unmute");
+            } else {
+                buttonReset.setText("Mute");
+            }
         } else {
             editTextInput.setVisibility(View.VISIBLE);
             buttonSet.setVisibility(View.VISIBLE);
@@ -188,6 +205,7 @@ public class TimerFragment extends Fragment {
 
             if (timeLeftInMillis < startTimeInMillis) {
                 buttonReset.setVisibility(View.VISIBLE);
+                buttonReset.setText("Reset");
             } else {
                 buttonReset.setVisibility(View.INVISIBLE);
             }
@@ -252,11 +270,57 @@ public class TimerFragment extends Fragment {
             return;
         }
 
-
         // Notify using the notification manager
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
+    private void startMusic() {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(getActivity(), R.raw.timer_bg_music);
+            mediaPlayer.setLooping(true);
+        }
+
+        if (musicPaused) {
+            // If music was paused, resume it
+            mediaPlayer.start();
+            musicPaused = false;
+        } else {
+            // If music was not paused, start it
+            mediaPlayer.seekTo(0);  // Start from the beginning
+            mediaPlayer.start();
+        }
+    }
+
+    private void pauseMusic() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            musicPaused = true;
+        }
+    }
+
+    private void stopMusic() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    private void toggleMute() {
+        buttonReset.setVisibility(View.VISIBLE);
+        if (isMuted) {
+            // If currently muted, unmute and update button text
+            isMuted = false;
+            buttonReset.setText("Mute");
+            // Resume or start the music
+            startMusic();
+        } else {
+            // If currently unmuted, mute and update button text
+            isMuted = true;
+            buttonReset.setText("Unmute");
+            // Pause the music
+            pauseMusic();
+        }
+    }
 
     @Override
     public void onStop() {
@@ -275,6 +339,8 @@ public class TimerFragment extends Fragment {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
+        // Stop the music when the fragment is stopped
+        stopMusic();
     }
 
     @Override
@@ -303,5 +369,11 @@ public class TimerFragment extends Fragment {
                 startTimer();
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopMusic();
     }
 }
