@@ -3,14 +3,15 @@ package com.example.artmind.api;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class RoboflowApi {
 
@@ -18,53 +19,40 @@ public class RoboflowApi {
         new AsyncTask<Uri, Void, String>() {
             @Override
             protected String doInBackground(Uri... uris) {
-                HttpURLConnection connect = null;
                 try {
-                    URL link = new URL(uris[0].toString());
-                    connect = (HttpURLConnection) link.openConnection();
-                    InputStream inputStream = connect.getInputStream();
-                    byte[] imageData = readBytes(inputStream);
+                    OkHttpClient client = new OkHttpClient.Builder()
+                            .connectTimeout(30, TimeUnit.SECONDS)
+                            .readTimeout(30, TimeUnit.SECONDS)
+                            .writeTimeout(30, TimeUnit.SECONDS)
+                            .build();
 
-                    // Initialize Inference Server Request with API Key, Model, and Model Version
-                    String uploadURL = "https://classify.roboflow.com/mental-health-drawing/1?api_key=1hjoF8Vcp6yqoaoSbFc2&name=YOUR_IMAGE.jpg";
-                    URL url = new URL(uploadURL);
-                    connect = (HttpURLConnection) url.openConnection();
-                    connect.setRequestMethod("POST");
-                    connect.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    connect.setRequestProperty("Content-Length", Integer.toString(uploadURL.getBytes().length));
-                    connect.setRequestProperty("Content-Language", "en-US");
-                    connect.setUseCaches(false);
-                    connect.setDoOutput(true);
+                    MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 
-                    // Send request
-                    DataOutputStream wr = new DataOutputStream(connect.getOutputStream());
-                    wr.writeBytes(uploadURL);
-                    wr.close();
+                    // Replace *base54* with the actual image URL
+                    String imageUrl = uris[0].toString();
 
-                    // Get Response
-                    int responseCode = connect.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder response = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            response.append(line);
-                        }
-                        reader.close();
-                        return response.toString();
+                    RequestBody body = new FormBody.Builder()
+                            .add("image", imageUrl)
+                            .build();
+
+                    Request request = new Request.Builder()
+                            .url("https://classify.roboflow.com/mental-health-drawing/1?api_key=EP2kiEX6FQq9RXkV4WdZ")
+                            .post(body)
+                            .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                            .build();
+
+                    Response response = client.newCall(request).execute();
+
+                    // Check if the request was successful
+                    if (response.isSuccessful()) {
+                        return response.body().string();
                     } else {
-                        String errorDetails = "Request failed with response code: " + responseCode;
-                        errorDetails += "\nResponse Message: " + connect.getResponseMessage();
-                        return errorDetails;
+                        return "Error: " + response.code() + " - " + response.message();
                     }
 
                 } catch (IOException e) {
                     e.printStackTrace();
                     return "Error: " + e.getMessage();
-                } finally {
-                    if (connect != null) {
-                        connect.disconnect(); // Close the connection to avoid leaks
-                    }
                 }
             }
 
@@ -76,17 +64,4 @@ public class RoboflowApi {
             }
         }.execute(uri);
     }
-
-    private static byte[] readBytes(InputStream inputStream) throws IOException {
-        try (ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream()) {
-            int bufferSize = 1024;
-            byte[] buffer = new byte[bufferSize];
-            int len;
-            while ((len = inputStream.read(buffer)) != -1) {
-                byteBuffer.write(buffer, 0, len);
-            }
-            return byteBuffer.toByteArray();
-        }
-    }
 }
-

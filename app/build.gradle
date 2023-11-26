@@ -57,4 +57,6 @@ dependencies {
     implementation 'org.pytorch:pytorch_android_lite:2.1.0'
     implementation 'org.pytorch:pytorch_android_torchvision_lite:2.1.0'
     implementation 'androidx.palette:palette:1.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+
 }
