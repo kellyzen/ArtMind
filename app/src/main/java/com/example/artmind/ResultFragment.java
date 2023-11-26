@@ -32,9 +32,18 @@ public class ResultFragment extends Fragment {
     SharedViewModel sharedViewModel;
     String desc;
     String category;
+    String image;
     int percentage;
 
     public ResultFragment() {
+    }
+
+    public ResultFragment(int percentage, String category, String desc, String image) {
+        // Set the values directly in the constructor
+        this.percentage = percentage;
+        this.category = category;
+        this.desc = desc;
+        this.image = image;
     }
 
     @Override
@@ -57,18 +66,38 @@ public class ResultFragment extends Fragment {
 //                    }
 //                });
 
-        // Load the selected crop image
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        loadImage();
+        if (category != null && desc != null && image != null) {
+            setHistoryResult(percentage, category, desc, image);
+        } else {
+            // Load the selected crop image
+            sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+            loadImage();
 
-        // Set image description field with authorName | time | date
-        String authorName = getAuthorName();
-        String time = getCurrentTime();
-        String date = getCurrentDate();
-        desc = authorName + " | " + time + " | " + date;
-        resultDesc.setText(desc);
+            // Set image description field with authorName | time | date
+            String authorName = getAuthorName();
+            String time = getCurrentTime();
+            String date = getCurrentDate();
+            desc = authorName + " | " + time + " | " + date;
+            resultDesc.setText(desc);
+        }
 
         return view;
+    }
+
+    private void setHistoryResult(int percentage, String category, String desc, String image) {
+        // Set the values to the UI elements
+        resultCategory.setText(category);
+        resultPercentage.setText(percentage + "%");
+        resultDesc.setText(desc);
+        resultProgress.setProgress(percentage);
+
+        FirebaseUtil.getHistoryStorageRef().child(image).getDownloadUrl()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        Picasso.get().load(uri).into(resultImage);
+                    }
+                });
     }
 
     // Load image URI

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -57,15 +58,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         }
 
         // Save the formatted string back to desc
-        desc = formattedDesc.toString();
+        String newDesc = formattedDesc.toString();
 
         holder.historyCategory.setText(category);
         holder.historyPercentage.setText(percentage + "%");
-        holder.historyDesc.setText(desc);
+        holder.historyDesc.setText(newDesc);
 
         FirebaseUtil.readHistory(historyModels -> {
             setHistoryImage(image, holder.historyImage);
         });
+
+        // implement setOnClickListener event on item view.
+        holder.itemView.setOnClickListener(view -> {
+            ResultFragment resultFragment = new ResultFragment(Integer.parseInt(percentage), category, desc, image);
+            ((AppCompatActivity) helpContext).getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, resultFragment).commit();
+        });
+
     }
 
     @Override
@@ -74,13 +82,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     }
 
     private void setHistoryImage(String fileName, ImageView image) {
-        FirebaseUtil.getHistoryStorageRef().child(fileName).getDownloadUrl()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Uri uri = task.getResult();
-                        Glide.with(helpContext).load(uri).into(image);
-                    }
-                });
+        FirebaseUtil.getHistoryStorageRef().child(fileName).getDownloadUrl().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Uri uri = task.getResult();
+                Glide.with(helpContext).load(uri).into(image);
+            }
+        });
     }
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
