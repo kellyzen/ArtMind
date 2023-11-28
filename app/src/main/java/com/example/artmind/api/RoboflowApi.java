@@ -13,8 +13,19 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * Call API from Roboflow ML model
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class RoboflowApi {
 
+    /**
+     * Main method call to get prediction result from Roboflow API
+     *
+     * @param uri uri of image to be analysed by ML
+     */
     public static void getPrediction(Uri uri) {
         new AsyncTask<Uri, Void, String>() {
             @Override
@@ -56,6 +67,7 @@ public class RoboflowApi {
                 }
             }
 
+            // Print the result upon receiving the JSON output
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);

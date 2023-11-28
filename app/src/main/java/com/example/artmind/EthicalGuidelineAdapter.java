@@ -11,6 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+/**
+ * Ethical Guideline page (adapter)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class EthicalGuidelineAdapter extends PagerAdapter {
     Context context;
     int[] images = {
@@ -33,20 +39,34 @@ public class EthicalGuidelineAdapter extends PagerAdapter {
             R.string.guideline4,
     };
 
+    /**
+     * Constructor method for Find Ethical Guideline Adapter
+     *
+     * @param context ethical guideline fragment's context
+     */
     public EthicalGuidelineAdapter(Context context) {
         this.context = context;
     }
 
+    /**
+     * Get ethical guideline view pager list size
+     */
     @Override
     public int getCount() {
         return headings.length;
     }
 
+    /**
+     * Determine is view from object
+     */
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    /**
+     * Set text/ image for each view item on the view pager
+     */
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -65,6 +85,9 @@ public class EthicalGuidelineAdapter extends PagerAdapter {
         return view;
     }
 
+    /**
+     * Remove view item when navigates to another fragment
+     */
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((LinearLayout) object);

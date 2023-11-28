@@ -10,9 +10,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b203650-669d-4812-ad83-284a3c9d9de1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/MusicPlayerModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/AboutFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/AboutFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/EthicalGuidelineAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/EthicalGuidelineAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/EthicalGuidelineFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/EthicalGuidelineFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/FindHelpAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/FindHelpAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/FindHelpCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/FindHelpCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/FindHelpFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/FindHelpFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/HistoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/HistoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/HistoryCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/HistoryCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/HistoryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/HistoryFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/LoginOTPActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/LoginOTPActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/LoginPhoneNumberActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/LoginPhoneNumberActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/LoginUsernameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/LoginUsernameActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/ResultFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/ResultFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/ScanFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/ScanFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/SettingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/SettingFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/SplashActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/SplashActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/TimerCompleteFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/TimerCompleteFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/TimerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/TimerFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/UserFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/UserFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/api/RoboflowApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/api/RoboflowApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/ColorAnalysisModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/ColorAnalysisModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/HistoryCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/HistoryCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/HistoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/HistoryModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/SharedViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/SharedViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/model/UserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/utils/AndroidUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/utils/AndroidUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/utils/FirebaseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/artmind/utils/FirebaseUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ethical_guideline.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ethical_guideline.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_timer_complete.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_timer_complete.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/slider_ethical_guideline.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/slider_ethical_guideline.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

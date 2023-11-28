@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        android:text="Ethical Guidelines" />
+        android:text="@string/user_manual_title" />
 
     <LinearLayout
         android:id="@+id/ellipses"
@@ -27,6 +27,6 @@
         android:id="@+id/guideline_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="User Guidelines" />
+        android:contentDescription="@string/user_manual_title" />
 
 </LinearLayout>

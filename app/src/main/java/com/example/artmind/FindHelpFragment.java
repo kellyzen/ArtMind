@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +20,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+/**
+ * Find Help page (fragment)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class FindHelpFragment extends Fragment {
     CountryCodePicker countryCodePicker;
     private RecyclerView recyclerView;
@@ -28,18 +33,25 @@ public class FindHelpFragment extends Fragment {
     private ArrayList<FindHelpCard> findHelpCardArrayList;
     private String country;
 
+    /**
+     * Constructor method for Find Help Fragment
+     */
     public FindHelpFragment() {
     }
 
+    /**
+     * Create view for Ethical Guideline Fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_find_help, container, false);
 
-        //Determine selected country
+        // Determine selected country
         countryCodePicker = view.findViewById(R.id.find_help_countrycode);
         country = countryCodePicker.getSelectedCountryNameCode().toLowerCase();
 
+        // Get the JSON array from selected country
         countryCodePicker.setOnCountryChangeListener(() -> {
             country = countryCodePicker.getSelectedCountryNameCode().toLowerCase();
             try {
@@ -62,6 +74,9 @@ public class FindHelpFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Get information from JSON
+     */
     private void parseJSON() throws JSONException {
         String name;
         String title;
@@ -70,6 +85,7 @@ public class FindHelpFragment extends Fragment {
         String email;
         String whatsapp;
         String contact;
+
         // get JSONObject from JSON file
         JSONObject obj = new JSONObject(loadJSONFromAsset());
 
@@ -115,6 +131,11 @@ public class FindHelpFragment extends Fragment {
         recyclerView.setAdapter(findHelpAdapter);
     }
 
+    /**
+     * Load JSON file from assets folder
+     *
+     * @return String
+     */
     public String loadJSONFromAsset() {
         String json = null;
         try {

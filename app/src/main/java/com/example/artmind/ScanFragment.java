@@ -28,6 +28,12 @@ import com.example.artmind.utils.FirebaseUtil;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+/**
+ * Scan page (fragment)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class ScanFragment extends Fragment {
     Button scanBtn;
     EditText authorInput;
@@ -36,9 +42,15 @@ public class ScanFragment extends Fragment {
     UserModel userModel;
     private static final int REQUEST_CAMERA_CODE = 100;
 
+    /**
+     * Constructor method for Scan Fragment
+     */
     public ScanFragment() {
     }
 
+    /**
+     * Create view for Scan Fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
@@ -61,11 +73,16 @@ public class ScanFragment extends Fragment {
         return view;
     }
 
-    // Call this method to start the cropping activity
+    /**
+     * To crop the uploaded image
+     */
     private void startCropActivity() {
         CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(getContext(), this);
     }
 
+    /**
+     * Request storage permission to store the taken image in device internal file
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -81,6 +98,9 @@ public class ScanFragment extends Fragment {
         }
     }
 
+    /**
+     * Get the cropped image and navigate to result fragment for analysing
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -101,6 +121,9 @@ public class ScanFragment extends Fragment {
         }
     }
 
+    /**
+     * Navigate to result fragment
+     */
     private void navigateToResultFragment() {
         String authorName = authorInput.getText().toString();
         Bundle bundle = new Bundle();
@@ -109,6 +132,9 @@ public class ScanFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, resultFragment).commit();
     }
 
+    /**
+     * Getter method for user's username
+     */
     private void getUsername() {
         FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

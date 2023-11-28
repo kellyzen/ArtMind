@@ -17,15 +17,30 @@ import com.example.artmind.utils.FirebaseUtil;
 
 import java.util.ArrayList;
 
+/**
+ * History page (adapter)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
     private Context helpContext;
     private ArrayList<HistoryCard> historyCardArrayList;
 
+    /**
+     * Constructor method for History Adapter
+     *
+     * @param context history fragment's context
+     * @param list    history card list
+     */
     public HistoryAdapter(Context context, ArrayList<HistoryCard> list) {
         helpContext = context;
         historyCardArrayList = list;
     }
 
+    /**
+     * Create view holder for history card
+     */
     @NonNull
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +48,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         return new HistoryAdapter.HistoryViewHolder(v);
     }
 
+    /**
+     * Set text for history card on bind
+     */
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         HistoryCard currentItem = historyCardArrayList.get(position);
@@ -76,11 +94,20 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     }
 
+    /**
+     * Get history card list size
+     */
     @Override
     public int getItemCount() {
         return historyCardArrayList.size();
     }
 
+    /**
+     * Set result image on history card
+     *
+     * @param fileName file name of the image in Firebase (xxx.jpg)
+     * @param image image view of the image to be set to
+     */
     private void setHistoryImage(String fileName, ImageView image) {
         FirebaseUtil.getHistoryStorageRef().child(fileName).getDownloadUrl().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -90,12 +117,20 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         });
     }
 
+    /**
+     * History page (view holder)
+     */
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
         public ImageView historyImage;
         public TextView historyCategory;
         public TextView historyPercentage;
         public TextView historyDesc;
 
+        /**
+         * Constructor method for History Holder
+         *
+         * @param itemView view id of the history card
+         */
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             historyImage = itemView.findViewById(R.id.history_image);

@@ -1,16 +1,19 @@
 package com.example.artmind;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.artmind.model.SharedViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
+/**
+ * Main page (activity)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     TimerFragment timerFragment;
@@ -20,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     SettingFragment settingFragment;
     SharedViewModel sharedViewModel;
 
+    /**
+     * Create view for Main Activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
         settingFragment = new SettingFragment();
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
 
-        //Bottom Navigation View
+        // Bottom Navigation View
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        // Load respective fragment based on selected navigation
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.menu_timer) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, timerFragment).commit();

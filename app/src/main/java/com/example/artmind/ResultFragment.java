@@ -23,6 +23,12 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * Result page (fragment)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class ResultFragment extends Fragment {
     ImageView resultImage;
     TextView resultCategory;
@@ -35,9 +41,20 @@ public class ResultFragment extends Fragment {
     String image;
     int percentage;
 
+    /**
+     * Constructor method for Result Fragment
+     */
     public ResultFragment() {
     }
 
+    /**
+     * Constructor method for Result Fragment with parameters
+     *
+     * @param percentage percentage of result image
+     * @param category category of result image (healthy, unhealthy)
+     * @param desc description of result image (author name, date, time)
+     * @param image path of result image
+     */
     public ResultFragment(int percentage, String category, String desc, String image) {
         // Set the values directly in the constructor
         this.percentage = percentage;
@@ -46,6 +63,9 @@ public class ResultFragment extends Fragment {
         this.image = image;
     }
 
+    /**
+     * Create view for Result Fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -84,6 +104,9 @@ public class ResultFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Get history result from Firebase and display it in fragment
+     */
     private void setHistoryResult(int percentage, String category, String desc, String image) {
         // Set the values to the UI elements
         resultCategory.setText(category);
@@ -100,7 +123,9 @@ public class ResultFragment extends Fragment {
                 });
     }
 
-    // Load image URI
+    /**
+     * Load image uri
+     */
     private void loadImage() {
         sharedViewModel.getCroppedImageUri().observe(getViewLifecycleOwner(), uri -> {
             if (uri != null) {
@@ -110,7 +135,11 @@ public class ResultFragment extends Fragment {
         });
     }
 
-    // Retrieve author's name from arguments
+    /**
+     * Retrieve author's name from arguments
+     *
+     * @param uri uri of the result image from Firebase
+     */
     private void setResult(Uri uri) {
         ColorAnalysisModel model = new ColorAnalysisModel();
         model.analyzeImage(getActivity(), uri);
@@ -124,14 +153,23 @@ public class ResultFragment extends Fragment {
         uploadImageToFirestore(uri);
     }
 
+    /**
+     * Upload new result image to Firebase
+     *
+     * @param uri uri of the result image
+     */
     private void uploadImageToFirestore(Uri uri) {
         String fileName = uri.getLastPathSegment();
         FirebaseUtil.getHistoryStorageRef().child(fileName).putFile(uri).addOnCompleteListener(task -> {
-
         });
         updateDetailsToFirestore(fileName);
     }
 
+    /**
+     * Update the history information to Firebase
+     *
+     * @param filePath path to result image stored in Firebase
+     */
     private void updateDetailsToFirestore(String filePath) {
         HistoryModel newHistory = new HistoryModel();
         newHistory.setImagePath(filePath);
@@ -142,7 +180,11 @@ public class ResultFragment extends Fragment {
         FirebaseUtil.updateHistory(newHistory);
     }
 
-    // Retrieve author's name from arguments
+    /**
+     * Getter method for author's name
+     *
+     * @return String
+     */
     private String getAuthorName() {
         Bundle arguments = getArguments();
         if (arguments != null && arguments.containsKey("authorName")) {
@@ -151,7 +193,9 @@ public class ResultFragment extends Fragment {
         return "";
     }
 
-    // Get current time in HH:MM:SS format
+    /**
+     * Retrieve current time when image uploaded
+     */
     private String getCurrentTime() {
         TimeZone timeZone = TimeZone.getTimeZone("MYT");
         Calendar calendar = Calendar.getInstance(timeZone);
@@ -159,7 +203,9 @@ public class ResultFragment extends Fragment {
         return sdf.format(calendar.getTime());
     }
 
-    // Get current date in DD/MM/YYYY format
+    /**
+     * Retrieve current date when image uploaded in DD/MM/YYYY format
+     */
     private String getCurrentDate() {
         TimeZone timeZone = TimeZone.getTimeZone("MYT");
         Calendar calendar = Calendar.getInstance(timeZone);

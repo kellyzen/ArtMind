@@ -22,6 +22,12 @@ import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
+/**
+ * User Profile page (fragment)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class UserFragment extends Fragment {
     ImageView profilePic;
     EditText usernameInput;
@@ -32,9 +38,15 @@ public class UserFragment extends Fragment {
     ActivityResultLauncher<Intent> imagePickLauncher;
     Uri selectedImageUri;
 
+    /**
+     * Constructor method for User Fragment
+     */
     public UserFragment() {
     }
 
+    /**
+     * Update profile image on create
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +63,9 @@ public class UserFragment extends Fragment {
         );
     }
 
+    /**
+     * Create view for User Fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,20 +88,24 @@ public class UserFragment extends Fragment {
                         return null;
                     });
         });
-
         return view;
     }
 
+    /**
+     * Update user's new information (username, profile picture) to Firebase
+     */
     void updateBtnClick() {
         String newUsername = usernameInput.getText().toString();
+        // Username input validation
         if (newUsername.isEmpty() || newUsername.length() < 3) {
             usernameInput.setError("Username length should be at least 3 chars");
             return;
         }
+        // Update the user model
         currentUserModel.setUsername(newUsername);
-        setInProgress(true);
+        AndroidUtil.setInProgress(true, progressBar, updateProfileBtn);
 
-
+        // If user updated new image, save the new profile pic to Firebase
         if (selectedImageUri != null) {
             FirebaseUtil.getCurrentProfilePicStorageRef().putFile(selectedImageUri)
                     .addOnCompleteListener(task -> {
@@ -97,10 +116,13 @@ public class UserFragment extends Fragment {
         }
     }
 
+    /**
+     * Update current user information to Firebase
+     */
     void updateToFirestore() {
         FirebaseUtil.currentUserDetails().set(currentUserModel)
                 .addOnCompleteListener(task -> {
-                    setInProgress(false);
+                    AndroidUtil.setInProgress(false, progressBar, updateProfileBtn);
                     if (task.isSuccessful()) {
                         AndroidUtil.showToast(getContext(), "Updated successfully");
                     } else {
@@ -110,8 +132,11 @@ public class UserFragment extends Fragment {
     }
 
 
+    /**
+     * Retrieve user's information from Firebase
+     */
     void getUserData() {
-        setInProgress(true);
+        AndroidUtil.setInProgress(true, progressBar, updateProfileBtn);
 
         FirebaseUtil.getCurrentProfilePicStorageRef().getDownloadUrl()
                 .addOnCompleteListener(task -> {
@@ -122,21 +147,10 @@ public class UserFragment extends Fragment {
                 });
 
         FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task -> {
-            setInProgress(false);
+            AndroidUtil.setInProgress(false, progressBar, updateProfileBtn);
             currentUserModel = task.getResult().toObject(UserModel.class);
             usernameInput.setText(currentUserModel.getUsername());
             phoneInput.setText(currentUserModel.getPhone());
         });
-    }
-
-
-    void setInProgress(boolean inProgress) {
-        if (inProgress) {
-            progressBar.setVisibility(View.VISIBLE);
-            updateProfileBtn.setVisibility(View.GONE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-            updateProfileBtn.setVisibility(View.VISIBLE);
-        }
     }
 }

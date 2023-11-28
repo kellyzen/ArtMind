@@ -14,15 +14,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Find Help page (adapter)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class FindHelpAdapter extends RecyclerView.Adapter<FindHelpAdapter.FindHelpViewHolder> {
     private Context helpContext;
     private ArrayList<FindHelpCard> findHelpCardArrayList;
 
+    /**
+     * Constructor method for Find Help Adapter
+     *
+     * @param context find help fragment's context
+     * @param list    find help card list
+     */
     public FindHelpAdapter(Context context, ArrayList<FindHelpCard> list) {
         helpContext = context;
         findHelpCardArrayList = list;
     }
 
+    /**
+     * Create view holder for find help card
+     */
     @NonNull
     @Override
     public FindHelpViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,6 +45,9 @@ public class FindHelpAdapter extends RecyclerView.Adapter<FindHelpAdapter.FindHe
         return new FindHelpViewHolder(v);
     }
 
+    /**
+     * Set text for find help card on bind
+     */
     @Override
     public void onBindViewHolder(@NonNull FindHelpViewHolder holder, int position) {
         FindHelpCard currentItem = findHelpCardArrayList.get(position);
@@ -46,10 +64,9 @@ public class FindHelpAdapter extends RecyclerView.Adapter<FindHelpAdapter.FindHe
             holder.helpCentreWebsite.setText("");
         }
 
-        // implement setOnClickListener event on item view.
         holder.itemView.setOnClickListener(view -> {
             if (website != null) {
-                // redirect to website on item click
+                // Redirect to website on item click
                 Uri uri = Uri.parse("http://" + website);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 helpContext.startActivity(intent);
@@ -57,17 +74,28 @@ public class FindHelpAdapter extends RecyclerView.Adapter<FindHelpAdapter.FindHe
         });
     }
 
+    /**
+     * Get find help card list size
+     */
     @Override
     public int getItemCount() {
         return findHelpCardArrayList.size();
     }
 
+    /**
+     * Find Help page (view holder)
+     */
     public class FindHelpViewHolder extends RecyclerView.ViewHolder {
         public TextView helpCentreName;
         public TextView helpCentreTitle;
         public TextView helpCentreContact;
         public TextView helpCentreWebsite;
 
+        /**
+         * Constructor method for Find Help Holder
+         *
+         * @param itemView view id of the find help card
+         */
         public FindHelpViewHolder(@NonNull View itemView) {
             super(itemView);
             helpCentreName = itemView.findViewById(R.id.help_centre_name);

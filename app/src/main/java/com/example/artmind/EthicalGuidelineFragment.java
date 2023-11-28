@@ -11,15 +11,27 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+/**
+ * Ethical Guideline page (fragment)
+ *
+ * @author Kelly Tan
+ * @version 27 November 2023
+ */
 public class EthicalGuidelineFragment extends Fragment {
     ViewPager viewPager;
     LinearLayout dotLayout;
     TextView[] dots;
     EthicalGuidelineAdapter ethicalGuidelineAdapter;
 
+    /**
+     * Constructor method for Ethical Guideline Fragment
+     */
     public EthicalGuidelineFragment() {
     }
 
+    /**
+     * Create view for Ethical Guideline Fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,6 +40,7 @@ public class EthicalGuidelineFragment extends Fragment {
         viewPager = view.findViewById(R.id.guideline_view_pager);
         dotLayout = view.findViewById(R.id.ellipses);
 
+        // Setup view pager
         ethicalGuidelineAdapter = new EthicalGuidelineAdapter(getContext());
         viewPager.setVisibility(View.VISIBLE);
         viewPager.setAdapter(ethicalGuidelineAdapter);
@@ -38,10 +51,16 @@ public class EthicalGuidelineFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Set up ellipses to navigate between pages
+     *
+     * @param position the which page is the user at now
+     */
     public void setUpEllipses(int position) {
         dots = new TextView[4];
         dotLayout.removeAllViews();
 
+        // Create and set color for each ellipses
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(getActivity());
             dots[i].setText(Html.fromHtml("&#8226"));
@@ -55,9 +74,9 @@ public class EthicalGuidelineFragment extends Fragment {
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
         }
 
+        // Set up ellipses on for every page
         @Override
         public void onPageSelected(int position) {
             setUpEllipses(position);
@@ -65,7 +84,6 @@ public class EthicalGuidelineFragment extends Fragment {
 
         @Override
         public void onPageScrollStateChanged(int state) {
-
         }
     };
 }
