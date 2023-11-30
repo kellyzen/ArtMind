@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_about"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="40dp"
@@ -14,16 +15,16 @@
         android:weightSum="100">
 
         <TextView
+            style="@style/TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/about_title"
-            style="@style/TitleText"/>
+            android:text="@string/about_title" />
 
         <ImageView
             android:layout_width="250dp"
             android:layout_height="150dp"
-            android:layout_weight="20"
             android:layout_marginBottom="10dp"
+            android:layout_weight="20"
             android:src="@drawable/logo" />
 
         <TextView
@@ -31,8 +32,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/about_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </ScrollView>

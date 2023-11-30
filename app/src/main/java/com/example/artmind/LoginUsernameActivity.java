@@ -52,8 +52,8 @@ public class LoginUsernameActivity extends AppCompatActivity {
      */
     void setUsername() {
         String username = usernameInput.getText().toString();
-        if (username.isEmpty() || username.length() < 3) {
-            usernameInput.setError("Username length should be at least 3 chars");
+        if (UserModel.verifyUsername(username)) {
+            usernameInput.setError(String.valueOf(R.string.username_error));
             return;
         }
         AndroidUtil.setInProgress(true, progressBar, letMeInBtn);

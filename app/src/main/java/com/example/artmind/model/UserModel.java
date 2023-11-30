@@ -41,6 +41,10 @@ public class UserModel {
         this.history = history;
     }
 
+    public static boolean verifyUsername (String username) {
+        return username.isEmpty() || username.length() < 3 || username.length() > 10;
+    }
+
     /**
      * Getter method for phone
      *

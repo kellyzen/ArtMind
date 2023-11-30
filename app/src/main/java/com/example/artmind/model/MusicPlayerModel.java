@@ -88,5 +88,12 @@ public class MusicPlayerModel {
         }
         return isMuted;
     }
+
+    /**
+     * Getter method for Media Player
+     */
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
 }
 

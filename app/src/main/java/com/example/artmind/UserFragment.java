@@ -97,8 +97,8 @@ public class UserFragment extends Fragment {
     void updateBtnClick() {
         String newUsername = usernameInput.getText().toString();
         // Username input validation
-        if (newUsername.isEmpty() || newUsername.length() < 3) {
-            usernameInput.setError("Username length should be at least 3 chars");
+        if (UserModel.verifyUsername(newUsername)) {
+            usernameInput.setError(String.valueOf(R.string.username_error));
             return;
         }
         // Update the user model

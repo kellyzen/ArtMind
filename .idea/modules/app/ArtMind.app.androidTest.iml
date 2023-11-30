@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="CloudCustomPersistentConfigurations">
+    <option name="myCloudPersistentConfigurations">
+      <list>
+        <CloudPersistentConfiguration>
+          <option name="name" value="Firebase Test Matrix" />
+          <option name="devices">
+            <list>
+              <option value="Pixel2" />
+              <option value="Pixel2.arm" />
+            </list>
+          </option>
+          <option name="apiLevels">
+            <list>
+              <option value="26" />
+            </list>
+          </option>
+          <option name="languages">
+            <list>
+              <option value="en" />
+              <option value="zh" />
+            </list>
+          </option>
+          <option name="orientations">
+            <list>
+              <option value="portrait" />
+              <option value="landscape" />
+            </list>
+          </option>
+        </CloudPersistentConfiguration>
+      </list>
+    </option>
+  </component>
+</module>
