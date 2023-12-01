@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="50dp"
-    tools:context=".ScanFragment">
+    tools:context=".component.scan.ScanFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

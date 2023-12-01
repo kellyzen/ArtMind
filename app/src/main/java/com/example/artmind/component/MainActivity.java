@@ -1,11 +1,18 @@
-package com.example.artmind;
+package com.example.artmind.component;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.artmind.R;
+import com.example.artmind.component.find_help.FindHelpFragment;
+import com.example.artmind.component.focus_timer.TimerFragment;
+import com.example.artmind.component.history.HistoryFragment;
+import com.example.artmind.component.scan.ScanFragment;
+import com.example.artmind.component.settings.SettingFragment;
 import com.example.artmind.model.SharedViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -63,4 +70,18 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNavigationView.setSelectedItemId(R.id.menu_scan);
     }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Handle the configuration change, if needed.
+        // You may want to update your fragment here.
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Do something when the orientation changes to landscape
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // Do something when the orientation changes to portrait
+        }
+    }
+
 }

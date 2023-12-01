@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.history;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.artmind.R;
+import com.example.artmind.component.result.ResultFragment;
 import com.example.artmind.utils.FirebaseUtil;
 
 import java.util.ArrayList;

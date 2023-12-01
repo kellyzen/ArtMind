@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.find_help;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.artmind.R;
+import com.example.artmind.utils.AndroidUtil;
 import com.hbb20.CountryCodePicker;
 
 import org.json.JSONArray;
@@ -71,6 +73,7 @@ public class FindHelpFragment extends Fragment {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+        AndroidUtil.setupOnQuitPressed(requireActivity());
         return view;
     }
 

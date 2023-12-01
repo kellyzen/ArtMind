@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.artmind.R;
+import com.example.artmind.component.login.LoginPhoneNumberActivity;
 import com.example.artmind.utils.FirebaseUtil;
 
 /**

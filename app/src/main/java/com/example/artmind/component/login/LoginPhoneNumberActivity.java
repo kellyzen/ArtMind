@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.artmind.R;
 import com.hbb20.CountryCodePicker;
 
 /**

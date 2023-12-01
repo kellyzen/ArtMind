@@ -7,7 +7,7 @@
     android:layout_margin="50dp"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ScanFragment">
+    tools:context=".component.scan.ScanFragment">
 
     <TextView
         style="@style/TitleText"

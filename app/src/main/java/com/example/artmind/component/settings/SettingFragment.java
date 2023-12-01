@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTabHost;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.artmind.component.scan.ScanFragment;
+import com.example.artmind.component.settings.ethical_guideline.EthicalGuidelineFragment;
+import com.example.artmind.R;
+import com.example.artmind.component.SplashActivity;
+import com.example.artmind.component.settings.user_account.UserFragment;
+import com.example.artmind.component.settings.about.AboutFragment;
+import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
 
 /**
@@ -48,16 +58,20 @@ public class SettingFragment extends Fragment {
         manualBtn = view.findViewById(R.id.menu_user_manual);
 
         // Navigates to respective pages on button click
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         aboutBtn.setOnClickListener((v) -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, aboutFragment).commit();
+            fragmentTransaction.addToBackStack("AboutFragment");
+            fragmentTransaction.replace(R.id.main_frame_layout, aboutFragment, "AboutFragment").commit();
         });
 
         profileBtn.setOnClickListener((v) -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, userFragment).commit();
+            fragmentTransaction.addToBackStack("ProfileFragment");
+            fragmentTransaction.replace(R.id.main_frame_layout, userFragment, "ProfileFragment").commit();
         });
 
         manualBtn.setOnClickListener((v) -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ethicalGuidelineFragment).commit();
+            fragmentTransaction.addToBackStack("EthicalGuidelineFragment");
+            fragmentTransaction.replace(R.id.main_frame_layout, ethicalGuidelineFragment, "EthicalGuidelineFragment").commit();
         });
 
         // Logout
@@ -69,6 +83,7 @@ public class SettingFragment extends Fragment {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
+        AndroidUtil.setupOnQuitPressed(requireActivity());
 
         return view;
     }

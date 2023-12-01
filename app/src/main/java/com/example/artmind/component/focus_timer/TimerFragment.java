@@ -1,14 +1,9 @@
-package com.example.artmind;
+package com.example.artmind.component.focus_timer;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
-import android.Manifest;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -21,18 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
+import com.example.artmind.R;
 import com.example.artmind.model.MusicPlayerModel;
+import com.example.artmind.model.TimerModel;
 import com.example.artmind.utils.AndroidUtil;
-
-import java.util.Locale;
 
 /**
  * Focus Timer page (fragment)
@@ -48,15 +39,10 @@ public class TimerFragment extends Fragment {
     private Button buttonReset;
     private ImageView timerImageView;
     private CountDownTimer countDownTimer;
-    private boolean timerRunning;
-    private long startTimeInMillis;
-    private long timeLeftInMillis;
-    private long endTime;
-    private NotificationManagerCompat notificationManager;
     TimerCompleteFragment timerCompleteFragment;
     private MusicPlayerModel musicPlayer;
-    private static final int NOTIFICATION_ID = 1;
-    private static final int PERMISSION_REQUEST_VIBRATE = 1;
+    private TimerModel timerModel;
+    private TimerNotificationHelper notificationHelper;
     private boolean isMuted = false;
 
     /**
@@ -71,7 +57,9 @@ public class TimerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_timer, container, false);
+        View view = inflater.inflate(R.layout.fragment_timer, container, false);
+        AndroidUtil.setupOnQuitPressed(requireActivity());
+        return view;
     }
 
     /**
@@ -87,16 +75,11 @@ public class TimerFragment extends Fragment {
         buttonStartPause = getView().findViewById(R.id.button_start_pause);
         buttonReset = getView().findViewById(R.id.button_reset);
         musicPlayer = new MusicPlayerModel(getActivity(), R.raw.timer_bg_music);
+        timerModel = new TimerModel();
+        notificationHelper = new TimerNotificationHelper(requireContext());
 
         // Load frog image gif
         Glide.with(getActivity()).load(R.drawable.drawing_frog).into(new DrawableImageViewTarget(timerImageView));
-
-        // Create notification
-        notificationManager = NotificationManagerCompat.from(getActivity());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("channel_id", "Channel Name", NotificationManager.IMPORTANCE_LOW);
-            notificationManager.createNotificationChannel(channel);
-        }
 
         // Set timer in minutes
         buttonSet.setOnClickListener(v -> {
@@ -118,11 +101,10 @@ public class TimerFragment extends Fragment {
 
         // Start or pause timer
         buttonStartPause.setOnClickListener(v -> {
-            if (timerRunning) {
+            if (timerModel.isTimerRunning()) {
                 pauseTimer();
             } else {
                 startTimer();
-                startNotificationTimer();
                 if (!isMuted) {
                     musicPlayer.startMusic();
                 }
@@ -131,7 +113,7 @@ public class TimerFragment extends Fragment {
 
         // Reset timer or Mute/Unmute music
         buttonReset.setOnClickListener(v -> {
-            if (timerRunning) {
+            if (timerModel.isTimerRunning()) {
                 // If the timer is running, toggle mute/unmute
                 isMuted = musicPlayer.toggleMute(buttonReset, isMuted);
             } else {
@@ -145,7 +127,7 @@ public class TimerFragment extends Fragment {
      * Set countdown timer in minutes
      */
     private void setTime(long milliseconds) {
-        startTimeInMillis = milliseconds;
+        timerModel.setStartTimeInMillis(milliseconds);
         resetTimer();
         closeKeyboard();
     }
@@ -154,23 +136,25 @@ public class TimerFragment extends Fragment {
      * Start countdown timer
      */
     private void startTimer() {
-        endTime = System.currentTimeMillis() + timeLeftInMillis;
+        timerModel.setEndTime(System.currentTimeMillis() + timerModel.getTimeLeftInMillis());
 
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+        countDownTimer = new CountDownTimer(timerModel.getTimeLeftInMillis(), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
+                timerModel.setTimeLeftInMillis(millisUntilFinished);
                 updateCountDownText();
+                notificationHelper.updateNotification(millisUntilFinished);
             }
 
             @Override
             public void onFinish() {
-                timerRunning = false;
+                timerModel.setTimerRunning(false);
                 updateTimerInterface();
+                notificationHelper.showNotification("Timer Finished", "Your countdown timer has finished!");
             }
         }.start();
 
-        timerRunning = true;
+        timerModel.setTimerRunning(true);
         updateTimerInterface();
     }
 
@@ -178,18 +162,25 @@ public class TimerFragment extends Fragment {
      * Pause countdown timer
      */
     private void pauseTimer() {
-        countDownTimer.cancel();
-        timerRunning = false;
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            notificationHelper.cancelNotification();
+        }
+        timerModel.setTimerRunning(false);
         updateTimerInterface();
-        notificationManager.cancel(NOTIFICATION_ID);
         musicPlayer.pauseMusic();
     }
+
 
     /**
      * Reset countdown timer
      */
     private void resetTimer() {
-        timeLeftInMillis = startTimeInMillis;
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            notificationHelper.cancelNotification();
+        }
+        timerModel.setTimeLeftInMillis(timerModel.getStartTimeInMillis());
         updateCountDownText();
         updateTimerInterface();
     }
@@ -198,26 +189,14 @@ public class TimerFragment extends Fragment {
      * Continuously update countdown timer
      */
     private void updateCountDownText() {
-        int hours = (int) (timeLeftInMillis / 1000) / 3600;
-        int minutes = (int) ((timeLeftInMillis / 1000) % 3600) / 60;
-        int seconds = (int) (timeLeftInMillis / 1000) % 60;
-
-        String timeLeftFormatted;
-        if (hours > 0) {
-            timeLeftFormatted = String.format(Locale.getDefault(),
-                    "%d:%02d:%02d", hours, minutes, seconds);
-        } else {
-            timeLeftFormatted = String.format(Locale.getDefault(),
-                    "%02d:%02d", minutes, seconds);
-        }
-        textViewCountDown.setText(timeLeftFormatted);
+        textViewCountDown.setText(timerModel.convertTimer(timerModel.getTimeLeftInMillis()));
     }
 
     /**
      * Continuously set the updated countdown timer on interface
      */
     private void updateTimerInterface() {
-        if (timerRunning) {
+        if (timerModel.isTimerRunning()) {
             editTextInput.setVisibility(View.INVISIBLE);
             buttonSet.setVisibility(View.INVISIBLE);
             buttonStartPause.setText("Pause");
@@ -232,15 +211,15 @@ public class TimerFragment extends Fragment {
             buttonSet.setVisibility(View.VISIBLE);
             buttonStartPause.setText("Start");
 
-            if (timeLeftInMillis < 1000) {
+            if (timerModel.getTimeLeftInMillis() < 1000) {
                 resetTimer();
-                timerCompleteFragment = new TimerCompleteFragment();
+                timerCompleteFragment = new TimerCompleteFragment(timerModel.getStartTimeInMillis());
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, timerCompleteFragment).commit();
             } else {
                 buttonStartPause.setVisibility(View.VISIBLE);
             }
 
-            if (timeLeftInMillis < startTimeInMillis) {
+            if (timerModel.getTimeLeftInMillis() < timerModel.getStartTimeInMillis()) {
                 buttonReset.setVisibility(View.VISIBLE);
                 buttonReset.setText("Reset");
             } else {
@@ -261,70 +240,7 @@ public class TimerFragment extends Fragment {
     }
 
     /**
-     * Set and start timer in notification
-     */
-    private void startNotificationTimer() {
-        new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // Update the notification with the remaining time
-                updateNotification((int) (millisUntilFinished / 1000));
-            }
-
-            @Override
-            public void onFinish() {
-                // Notification timer finished, perform additional actions here
-                showNotification("Timer Finished", "Your countdown timer has finished!");
-            }
-        }.start();
-    }
-
-    /**
-     * Update the countdown timer in notification
-     */
-    private void updateNotification(int secondsLeft) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "channel_id")
-                .setSmallIcon(R.drawable.logo)
-                .setContentTitle("Timer Countdown")
-                .setContentText(String.format(Locale.getDefault(), "Time remaining: %d seconds", secondsLeft))
-                .setPriority(NotificationCompat.PRIORITY_LOW);
-
-        // Check if the app has the FOREGROUND_SERVICE permission
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.VIBRATE)
-                == PackageManager.PERMISSION_GRANTED) {
-            notificationManager.notify(NOTIFICATION_ID, builder.build());
-        } else {
-            // Request the FOREGROUND_SERVICE permission if not granted
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.VIBRATE},
-                    123);
-        }
-    }
-
-    /**
-     * Pops out countdown timer notification in mobile device
-     */
-    private void showNotification(String title, String content) {
-        // Create a notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "channel_id")
-                .setSmallIcon(R.drawable.logo)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setPriority(NotificationCompat.PRIORITY_LOW);
-
-        // Check for permission before notifying
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
-            // Request the VIBRATE permission if not granted
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.VIBRATE}, PERMISSION_REQUEST_VIBRATE);
-            return;
-        }
-
-        // Notify using the notification manager
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
-    }
-
-    /**
-     * Update the timer interface when timer is stopped
+     * Update the timer interface when timer is stopped and save in Shared Preferences
      */
     @Override
     public void onStop() {
@@ -333,10 +249,10 @@ public class TimerFragment extends Fragment {
         SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putLong("startTimeInMillis", startTimeInMillis);
-        editor.putLong("millisLeft", timeLeftInMillis);
-        editor.putBoolean("timerRunning", timerRunning);
-        editor.putLong("endTime", endTime);
+        editor.putLong("startTimeInMillis", timerModel.getStartTimeInMillis());
+        editor.putLong("millisLeft", timerModel.getTimeLeftInMillis());
+        editor.putBoolean("timerRunning", timerModel.isTimerRunning());
+        editor.putLong("endTime", timerModel.getEndTime());
 
         editor.apply();
 
@@ -348,28 +264,29 @@ public class TimerFragment extends Fragment {
     }
 
     /**
-     * Update the timer interface when timer is started
+     * Update the timer interface when timer is started from Shared Preferences
      */
     @Override
     public void onStart() {
         super.onStart();
 
+        // Save the time left in SharedPreferences
         SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
 
-        startTimeInMillis = prefs.getLong("startTimeInMillis", 600000);
-        timeLeftInMillis = prefs.getLong("millisLeft", startTimeInMillis);
-        timerRunning = prefs.getBoolean("timerRunning", false);
+        timerModel.setStartTimeInMillis(prefs.getLong("startTimeInMillis", 600000));
+        timerModel.setTimeLeftInMillis(prefs.getLong("millisLeft", timerModel.getStartTimeInMillis()));
+        timerModel.setTimerRunning(prefs.getBoolean("timerRunning", false));
 
         updateCountDownText();
         updateTimerInterface();
 
-        if (timerRunning) {
-            endTime = prefs.getLong("endTime", 0);
-            timeLeftInMillis = endTime - System.currentTimeMillis();
+        if (timerModel.isTimerRunning()) {
+            timerModel.setEndTime(prefs.getLong("endTime", 0));
+            timerModel.setTimeLeftInMillis(timerModel.getEndTime() - System.currentTimeMillis());
 
-            if (timeLeftInMillis < 0) {
-                timeLeftInMillis = 0;
-                timerRunning = false;
+            if (timerModel.getTimeLeftInMillis() < 0) {
+                timerModel.setTimeLeftInMillis(0);
+                timerModel.setTimerRunning(false);
                 updateCountDownText();
                 updateTimerInterface();
             } else {
@@ -377,6 +294,7 @@ public class TimerFragment extends Fragment {
             }
         }
     }
+
 
     /**
      * Destroy the timer when user navigates to another page

@@ -1,18 +1,17 @@
-package com.example.artmind;
+package com.example.artmind.component.login;
 
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.AnimatorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.artmind.R;
 import com.example.artmind.utils.AndroidUtil;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;

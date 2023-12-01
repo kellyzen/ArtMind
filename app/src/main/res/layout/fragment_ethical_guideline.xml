@@ -7,7 +7,7 @@
     android:layout_margin="40dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".EthicalGuidelineFragment">
+    tools:context=".component.settings.ethical_guideline.EthicalGuidelineFragment">
 
     <TextView
         style="@style/TitleText"

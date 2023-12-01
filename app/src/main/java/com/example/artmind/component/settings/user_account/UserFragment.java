@@ -1,9 +1,12 @@
-package com.example.artmind;
+package com.example.artmind.component.settings.user_account;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +17,12 @@ import android.widget.ProgressBar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.artmind.R;
+import com.example.artmind.component.settings.SettingFragment;
 import com.example.artmind.model.UserModel;
 import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
@@ -35,8 +41,10 @@ public class UserFragment extends Fragment {
     Button updateProfileBtn;
     ProgressBar progressBar;
     UserModel currentUserModel;
+    SettingFragment settingFragment;
     ActivityResultLauncher<Intent> imagePickLauncher;
     Uri selectedImageUri;
+    private boolean hasUnsavedChanges = false;
 
     /**
      * Constructor method for User Fragment
@@ -88,6 +96,8 @@ public class UserFragment extends Fragment {
                         return null;
                     });
         });
+        settingFragment = new SettingFragment();
+        AndroidUtil.setupOnBackPressed(requireActivity(), settingFragment);
         return view;
     }
 
@@ -97,7 +107,7 @@ public class UserFragment extends Fragment {
     void updateBtnClick() {
         String newUsername = usernameInput.getText().toString();
         // Username input validation
-        if (UserModel.verifyUsername(newUsername)) {
+        if (currentUserModel.verifyUsername(newUsername)) {
             usernameInput.setError(String.valueOf(R.string.username_error));
             return;
         }

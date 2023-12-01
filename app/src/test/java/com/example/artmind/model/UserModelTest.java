@@ -6,23 +6,25 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class UserModelTest {
+    UserModel userModel = new UserModel();
+
     @Test
     public void testVerifyUsername_emptyUsername_returnsTrue() {
-        assertTrue(UserModel.verifyUsername(""));
+        assertTrue(userModel.verifyUsername(""));
     }
 
     @Test
     public void testVerifyUsername_shortUsername_returnsTrue() {
-        assertTrue(UserModel.verifyUsername("ab"));
+        assertTrue(userModel.verifyUsername("ab"));
     }
 
     @Test
     public void testVerifyUsername_longUsername_returnsTrue() {
-        assertTrue(UserModel.verifyUsername("abcdefghijk"));
+        assertTrue(userModel.verifyUsername("abcdefghijk"));
     }
 
     @Test
     public void testVerifyUsername_validUsername_returnsFalse() {
-        assertFalse(UserModel.verifyUsername("john_doe"));
+        assertFalse(userModel.verifyUsername("john_doe"));
     }
 }

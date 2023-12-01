@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.settings.ethical_guideline;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.artmind.R;
 
 /**
  * Ethical Guideline page (adapter)

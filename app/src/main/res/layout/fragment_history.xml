@@ -6,7 +6,7 @@
     android:layout_margin="50dp"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".HistoryFragment">
+    tools:context=".component.history.HistoryFragment">
 
     <TextView
         style="@style/TitleText"

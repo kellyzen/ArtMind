@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.artmind.component.MainActivity;
+import com.example.artmind.R;
 import com.example.artmind.model.UserModel;
 import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
@@ -52,7 +54,7 @@ public class LoginUsernameActivity extends AppCompatActivity {
      */
     void setUsername() {
         String username = usernameInput.getText().toString();
-        if (UserModel.verifyUsername(username)) {
+        if (userModel.verifyUsername(username)) {
             usernameInput.setError(String.valueOf(R.string.username_error));
             return;
         }

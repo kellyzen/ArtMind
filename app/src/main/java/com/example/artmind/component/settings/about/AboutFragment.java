@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.settings.about;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.example.artmind.R;
+import com.example.artmind.component.settings.SettingFragment;
+import com.example.artmind.utils.AndroidUtil;
 
 /**
  * About page (fragment)
@@ -14,6 +19,7 @@ import androidx.fragment.app.Fragment;
  * @version 27 November 2023
  */
 public class AboutFragment extends Fragment {
+    SettingFragment settingFragment;
 
     /**
      * Constructor method for About Fragment
@@ -28,6 +34,10 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false);
+        View view = inflater.inflate(R.layout.fragment_about, container, false);
+
+        settingFragment = new SettingFragment();
+        AndroidUtil.setupOnBackPressed(requireActivity(), settingFragment);
+        return view;
     }
 }

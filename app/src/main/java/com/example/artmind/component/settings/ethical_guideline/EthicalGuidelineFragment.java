@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.settings.ethical_guideline;
 
 import android.os.Bundle;
 import android.text.Html;
@@ -11,6 +11,10 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.artmind.R;
+import com.example.artmind.component.settings.SettingFragment;
+import com.example.artmind.utils.AndroidUtil;
+
 /**
  * Ethical Guideline page (fragment)
  *
@@ -22,6 +26,7 @@ public class EthicalGuidelineFragment extends Fragment {
     LinearLayout dotLayout;
     TextView[] dots;
     EthicalGuidelineAdapter ethicalGuidelineAdapter;
+    SettingFragment settingFragment;
 
     /**
      * Constructor method for Ethical Guideline Fragment
@@ -48,6 +53,8 @@ public class EthicalGuidelineFragment extends Fragment {
         setUpEllipses(0);
         viewPager.addOnPageChangeListener(viewListener);
 
+        settingFragment = new SettingFragment();
+        AndroidUtil.setupOnBackPressed(requireActivity(), settingFragment);
         return view;
     }
 

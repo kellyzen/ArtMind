@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.setting;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
@@ -6,6 +6,9 @@ import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.example.artmind.component.MainActivity;
+import com.example.artmind.R;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

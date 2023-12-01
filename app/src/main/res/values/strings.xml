@@ -65,6 +65,6 @@
     <string name="country_desc_null">Stay tuned for the updates :)</string>
     <string name="username_error">Username should be of length 3 to 10</string>
     <string name="timer_content">Focus on your drawing to ease your mind of anxieties with the help of this timer!</string>
-    <string name="timer_complete_msg">Congratulations, you have focused for 10 mins!</string>
+    <string name="timer_complete_msg">Congratulations, you have focused for </string>
     <string name="disclaimer">Remember: \nThis tool is not a substitute for a diagnostic evaluation by mental health professional. Please refer to the Ethical Guidelines.</string>
 </resources>

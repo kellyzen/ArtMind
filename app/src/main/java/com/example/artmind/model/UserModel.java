@@ -10,7 +10,7 @@ import java.util.List;
  * @author Kelly Tan
  * @version 27 November 2023
  */
-public class UserModel {
+public class UserModel implements User{
     private String phone;
     private String username;
     private Timestamp createdTimestamp;
@@ -41,7 +41,13 @@ public class UserModel {
         this.history = history;
     }
 
-    public static boolean verifyUsername (String username) {
+    /**
+     * Verify whether username format is correct or not
+     *
+     * @param username username of the account
+     * @return boolean
+     */
+    public boolean verifyUsername (String username) {
         return username.isEmpty() || username.length() < 3 || username.length() > 10;
     }
 

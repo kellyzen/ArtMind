@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -27,16 +26,16 @@
         android:theme="@style/Theme.ArtMind"
         tools:targetApi="31">
         <activity
-            android:name=".LoginUsernameActivity"
+            android:name=".component.login.LoginUsernameActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginOTPActivity"
+            android:name=".component.login.LoginOTPActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginPhoneNumberActivity"
+            android:name=".component.login.LoginPhoneNumberActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".component.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,8 +44,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:name=".component.MainActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
     </application>

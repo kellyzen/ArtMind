@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="50dp"
     android:orientation="vertical"
-    tools:context=".FindHelpFragment">
+    tools:context=".component.find_help.FindHelpFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

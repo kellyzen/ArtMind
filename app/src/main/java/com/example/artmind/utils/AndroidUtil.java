@@ -8,8 +8,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.artmind.R;
 
 /**
  * Utility methods to repeated public functions
@@ -43,5 +49,38 @@ public class AndroidUtil {
             progressBar.setVisibility(View.GONE);
             button.setVisibility(View.VISIBLE);
         }
+    }
+
+    /**
+     * Quit the app when back button is pressed
+     */
+    public static void setupOnQuitPressed(FragmentActivity requireActivity) {
+        requireActivity.getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(isEnabled()) {
+                    setEnabled(false);
+                    System.exit(0);
+                }
+            }
+        });
+    }
+
+    /**
+     * Loads another fragment when back button is pressed
+     */
+    public static void setupOnBackPressed(FragmentActivity requireActivity, Fragment fragment) {
+        requireActivity.getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(isEnabled()) {
+                    setEnabled(false);
+
+                    // Navigate to another fragment here
+                    FragmentManager fragmentManager = requireActivity.getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, fragment).commit();
+                }
+            }
+        });
     }
 }

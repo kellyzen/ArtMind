@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.result;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,9 +12,12 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.artmind.R;
+import com.example.artmind.component.history.HistoryFragment;
 import com.example.artmind.model.ColorAnalysisModel;
 import com.example.artmind.model.HistoryModel;
 import com.example.artmind.model.SharedViewModel;
+import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +39,7 @@ public class ResultFragment extends Fragment {
     TextView resultDesc;
     ProgressBar resultProgress;
     SharedViewModel sharedViewModel;
+    HistoryFragment historyFragment;
     String desc;
     String category;
     String image;
@@ -101,6 +105,8 @@ public class ResultFragment extends Fragment {
             resultDesc.setText(desc);
         }
 
+        historyFragment = new HistoryFragment();
+        AndroidUtil.setupOnBackPressed(requireActivity(), historyFragment);
         return view;
     }
 

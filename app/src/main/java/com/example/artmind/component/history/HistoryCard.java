@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.history;
 
 /**
  * History page (card)

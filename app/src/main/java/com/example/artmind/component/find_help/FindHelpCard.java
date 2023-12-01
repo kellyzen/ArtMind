@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.find_help;
 
 /**
  * Find Help page (card)

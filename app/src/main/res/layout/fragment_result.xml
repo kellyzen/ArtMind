@@ -6,7 +6,7 @@
     android:layout_margin="50dp"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ResultFragment">
+    tools:context=".component.result.ResultFragment">
 
     <TextView
         style="@style/TitleText"

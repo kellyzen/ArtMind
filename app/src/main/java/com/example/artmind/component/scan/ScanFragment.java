@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.scan;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.artmind.R;
+import com.example.artmind.component.result.ResultFragment;
 import com.example.artmind.model.SharedViewModel;
 import com.example.artmind.model.UserModel;
 import com.example.artmind.utils.AndroidUtil;
@@ -68,6 +70,8 @@ public class ScanFragment extends Fragment {
         }
 
         scanBtn.setOnClickListener(v -> startCropActivity());
+
+        AndroidUtil.setupOnQuitPressed(requireActivity());
 
         // Inflate the layout for this fragment
         return view;

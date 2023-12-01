@@ -1,4 +1,4 @@
-package com.example.artmind;
+package com.example.artmind.component.find_help;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.artmind.R;
 
 import java.util.ArrayList;
 
