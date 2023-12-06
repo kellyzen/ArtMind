@@ -22,13 +22,17 @@
     <string name="send_otp">Hantar OTP</string>
     <string name="login_signin">Log/ Daftar Masuk</string>
     <string name="logout">Log Keluar</string>
-    <string name="next">Seterusnya</string>
+    <string name="next">Seterus</string>
+    <string name="back">Balik</string>
     <string name="resend_otp_click">Hantar Sekali OTP</string>
     <string name="update">Kemas Kini</string>
     <string name="save">Simpan</string>
     <string name="set">Tetap</string>
     <string name="reset">Tetap Semula</string>
     <string name="start">Mula</string>
+    <string name="scan">Imbas</string>
+    <string name="mute">Senyapkan</string>
+    <string name="unmute">Suarakan</string>
 
     <!--Tajuk-->
     <string name="timer_title">Pemasa</string>
@@ -41,14 +45,29 @@
     <string name="setting_title">Tetapan</string>
     <string name="user_manual_title">Manual Pengguna</string>
 
+    <!--Garis Panduan-->
+    <string name="guideline1">Nota Penting</string>
+    <string name="guideline2">Privacy Matters</string>
+    <string name="guideline3">Perkara Privasi</string>
+    <string name="guideline4">Perjanjian Garis Panduan</string>
+    <string name="desc1">ArtMind dimaksudkan untuk menjadi gambaran pantas kesihatan mental anda. Jika keputusan anda menunjukkan anda mungkin mengalami gejala penyakit mental, pertimbangkan untuk berkongsi keputusan anda dengan seseorang (seperti doktor atau ahli terapi).</string>
+    <string name="desc2">Hormati privasi orang lain. Jangan ambil tangkapan skrin atau kongsi sebarang kandungan tanpa kebenaran yang jelas. Setiap orang mempunyai hak untuk mengawal keterlihatan ciptaan mereka dan mengekalkan rasa selamat dalam komuniti.</string>
+    <string name="desc3">Privasi anda penting kepada kami. Yakinlah bahawa data yang dimuat naik tidak akan digunakan untuk sebarang tujuan penyelidikan. Kami komited untuk mengekalkan kerahsiaan maklumat anda.</string>
+    <string name="desc4">Menggunakan aplikasi ini membayangkan persetujuan anda untuk mengikut garis panduan kami, memupuk persekitaran beretika untuk semua orang. Kepatuhan anda menyumbang kepada kesejahteraan seluruh masyarakat.</string>
+
     <!--Lain-lain-->
     <string name="about_content">Matlamat ArtMind adalah untuk meningkatkan kesedaran diri individu berkenaan kesejahteraan mental mereka, memupuk pemahaman yang lebih mendalam tentang keadaan emosi mereka.
         It is not only designed for individuals but also for parents or educators.
         By identifying their mental state through creative expression, individuals can make informed decisions and access support from mental health centre through ArtMind.
     </string>
+    <string name="otp_success">OTP berjaya dihantar</string>
+    <string name="otp_fail">Pengesahan OTP gagal</string>
     <string name="prof_pic">Tekan gambar untuk tukar gambar profil</string>
     <string name="find_help_website">klik untuk melawati laman web</string>
     <string name="country_name_null">Tiada pusat bantuan ditemui untuk negara terpilih</string>
     <string name="country_desc_null">Nantikan kemas kini :)</string>
+    <string name="username_error">Nama pengguna hendaklah mempunyai panjang 3 hingga 10</string>
     <string name="timer_content">Fokus pada lukisan anda untuk meredakan kebimbangan anda dengan bantuan pemasa ini!</string>
+    <string name="timer_complete_msg">Tahniah, anda telah fokus untuk </string>
+    <string name="disclaimer">Ingat: \nAlat ini bukan pengganti untuk penilaian diagnostik oleh profesional kesihatan mental. Sila rujuk kepada Garis Panduan Etika.</string>
 </resources>

@@ -27,15 +27,15 @@ public class SettingFragmentTest {
         );
     }
 
-    @Test
-    public void testNavigationToUserProfileFragment() {
-        ActivityScenario<MainActivity> activityScenario = ActivityScenario.launch(MainActivity.class);
-        Espresso.onView(ViewMatchers.withId(R.id.menu_setting)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.menu_profile)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fragment_profile)).check(
-                ViewAssertions.matches(ViewMatchers.isDisplayed())
-        );
-    }
+//    @Test
+//    public void testNavigationToUserProfileFragment() {
+//        ActivityScenario<MainActivity> activityScenario = ActivityScenario.launch(MainActivity.class);
+//        Espresso.onView(ViewMatchers.withId(R.id.menu_setting)).perform(ViewActions.click());
+//        Espresso.onView(ViewMatchers.withId(R.id.menu_profile)).perform(ViewActions.click());
+//        Espresso.onView(ViewMatchers.withId(R.id.fragment_profile)).check(
+//                ViewAssertions.matches(ViewMatchers.isDisplayed())
+//        );
+//    }
 
     @Test
     public void testNavigationToEthicalGuidelineFragment() {

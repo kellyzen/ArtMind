@@ -23,12 +23,16 @@
     <string name="login_signin">登入账号</string>
     <string name="logout">登出</string>
     <string name="next">下一个</string>
+    <string name="back">回去</string>
     <string name="resend_otp_click">重发一次性密码</string>
     <string name="update">更新</string>
     <string name="save">保存</string>
     <string name="set">设置</string>
     <string name="reset">重置</string>
     <string name="start">开始</string>
+    <string name="scan">扫描</string>
+    <string name="mute">静音</string>
+    <string name="unmute">開音</string>
 
     <!--标题-->
     <string name="timer_title">计时</string>
@@ -41,14 +45,29 @@
     <string name="setting_title">设置</string>
     <string name="user_manual_title">用户手册</string>
 
+    <!--指南-->
+    <string name="guideline1">重要的提示</string>
+    <string name="guideline2">隐私问题</string>
+    <string name="guideline3">数据使用</string>
+    <string name="guideline4">指导协议</string>
+    <string name="desc1">ArtMind 旨在快速反映您的心理健康状况。 如果您的结果表明您可能正在经历精神疾病的症状，请考虑与某人（例如医生或治疗师）分享您的结果。</string>
+    <string name="desc2">尊重他人的隐私。 未经明确同意，请勿截取屏幕截图或分享任何内容。 每个人都有权控制自己创作的可见性并维持社区内的安全感。</string>
+    <string name="desc3">您的隐私对我们很重要。 请放心，上传的数据不会用于任何研究目的。 我们致力于维护您信息的机密性。</string>
+    <string name="desc4">使用此应用程序意味着您同意遵守我们的准则，为每个人营造一个道德环境。 您的遵守有助于整个社区的福祉。</string>
+
     <!--其他-->
     <string name="about_content">ArtMind 的目标是增强个人对其心理健康的自我意识，促进对其情绪状态的更深入了解。
         它不仅是为个人设计的，也是为父母或教育工作者设计的。
         通过创造性表达来识别自己的心理状态，个人可以做出明智的决定，并通过 ArtMind 获得心理健康中心的支持。
     </string>
+    <string name="otp_success">OTP发送成功</string>
+    <string name="otp_fail">OTP 验证失败</string>
     <string name="prof_pic">单击图片可更改个人资料图片</string>
     <string name="find_help_website">点击访问网站</string>
     <string name="country_name_null">找不到所选国家/地区的帮助中心</string>
     <string name="country_desc_null">请继续关注更新:)</string>
+    <string name="username_error">用户名长度应为 3 到 10</string>
     <string name="timer_content">在这个计时器的帮助下，专注于你的绘画，缓解你的焦虑！</string>
+    <string name="timer_complete_msg">恭喜你，你已经专注于 </string>
+    <string name="disclaimer">请记住：\n此工具不能替代心理健康专业人员的诊断评估。 请参阅道德准则。</string>
 </resources>

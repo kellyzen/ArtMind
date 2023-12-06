@@ -59,6 +59,8 @@
         It is not only designed for individuals but also for parents or educators.
         By identifying their mental state through creative expression, individuals can make informed decisions and access support from mental health centre through ArtMind.
     </string>
+    <string name="otp_success">OTP sent successfully</string>
+    <string name="otp_fail">OTP verification failed</string>
     <string name="prof_pic">Click image to change profile pic</string>
     <string name="find_help_website">click to visit website</string>
     <string name="country_name_null">No help centre(s) found for selected country</string>

@@ -97,7 +97,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                             // If entered OTP is invalid, then pops out error message
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                AndroidUtil.showToast(getApplicationContext(), "OTP verification failed");
+                                AndroidUtil.showToast(getApplicationContext(), String.valueOf(R.string.otp_fail));
                                 AndroidUtil.setInProgress(false, progressBar, nextBtn);
                             }
 
@@ -107,7 +107,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                                 super.onCodeSent(s, forceResendingToken);
                                 verificationCode = s;
                                 resendingToken = forceResendingToken;
-                                AndroidUtil.showToast(getApplicationContext(), "OTP sent successfully");
+                                AndroidUtil.showToast(getApplicationContext(), String.valueOf(R.string.otp_success));
                                 AndroidUtil.setInProgress(false, progressBar, nextBtn);
                             }
                         });
