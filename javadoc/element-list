@@ -1,0 +1,16 @@
+com.example.artmind
+com.example.artmind.api
+com.example.artmind.component
+com.example.artmind.component.find_help
+com.example.artmind.component.focus_timer
+com.example.artmind.component.history
+com.example.artmind.component.login
+com.example.artmind.component.result
+com.example.artmind.component.scan
+com.example.artmind.component.setting
+com.example.artmind.component.settings
+com.example.artmind.component.settings.about
+com.example.artmind.component.settings.ethical_guideline
+com.example.artmind.component.settings.user_account
+com.example.artmind.model
+com.example.artmind.utils

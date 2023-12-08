@@ -7,17 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTabHost;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.artmind.component.scan.ScanFragment;
-import com.example.artmind.component.settings.ethical_guideline.EthicalGuidelineFragment;
 import com.example.artmind.R;
 import com.example.artmind.component.SplashActivity;
-import com.example.artmind.component.settings.user_account.UserFragment;
 import com.example.artmind.component.settings.about.AboutFragment;
+import com.example.artmind.component.settings.ethical_guideline.EthicalGuidelineFragment;
+import com.example.artmind.component.settings.user_account.UserFragment;
 import com.example.artmind.utils.AndroidUtil;
 import com.example.artmind.utils.FirebaseUtil;
 
