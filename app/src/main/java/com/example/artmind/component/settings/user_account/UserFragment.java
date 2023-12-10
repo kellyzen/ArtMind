@@ -40,7 +40,6 @@ public class UserFragment extends Fragment {
     SettingFragment settingFragment;
     ActivityResultLauncher<Intent> imagePickLauncher;
     Uri selectedImageUri;
-    private boolean hasUnsavedChanges = false;
 
     /**
      * Constructor method for User Fragment

@@ -54,10 +54,7 @@ public class LoginUsernameActivity extends AppCompatActivity {
      */
     void setUsername() {
         String username = usernameInput.getText().toString();
-        if (userModel.verifyUsername(username)) {
-            usernameInput.setError(String.valueOf(R.string.username_error));
-            return;
-        }
+
         AndroidUtil.setInProgress(true, progressBar, letMeInBtn);
 
         // If user account exist, then use the existing user model
@@ -67,6 +64,11 @@ public class LoginUsernameActivity extends AppCompatActivity {
         // if user is new, set new user model
         else {
             userModel = new UserModel(phoneNumber, username, Timestamp.now(), FirebaseUtil.currentUserId(), null);
+        }
+
+        if (userModel.verifyUsername(username)) {
+            usernameInput.setError(String.valueOf(R.string.username_error));
+            return;
         }
 
         // Set the user's information to Firebase

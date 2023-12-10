@@ -34,7 +34,7 @@ public class AndroidUtil {
     /**
      * Set image to round shape
      */
-    public static void setRoundImage(Context context, Uri imageUri, ImageView imageView){
+    public static void setRoundImage(Context context, Uri imageUri, ImageView imageView) {
         Glide.with(context).load(imageUri).apply(RequestOptions.circleCropTransform()).into(imageView);
     }
 
@@ -58,7 +58,7 @@ public class AndroidUtil {
         requireActivity.getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if(isEnabled()) {
+                if (isEnabled()) {
                     setEnabled(false);
                     System.exit(0);
                 }
@@ -73,7 +73,7 @@ public class AndroidUtil {
         requireActivity.getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if(isEnabled()) {
+                if (isEnabled()) {
                     setEnabled(false);
 
                     // Navigate to another fragment here
