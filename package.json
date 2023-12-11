@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "echo \"No build specified\" && exit 1",
-    "test": "echo \"No test specified\" && exit 1",
+    "build": "npm run build",
+    "test": "npm test",
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kellyzen/ArtMind.git"
   },
-  "author": "",
+  "author": "Kelly Tan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kellyzen/ArtMind/issues"
