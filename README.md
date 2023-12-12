@@ -4,7 +4,7 @@
 1. Download [Android Studio](https://developer.android.com/studio).
 2. Install the Android Studio IDE using the downloaded installer along with JDK and direct the installation to your preferred path.
 3. Clone the repository to your local machine
-   ```git clone https://github.com/kellyzen/artmind-mobile.git```.
+   ```git clone https://github.com/kellyzen/artmind.git```.
 4. Open the project in Android Studio.
 5. Build the project using the "Build" menu in Android Studio.
 6. Run the application on an emulator or physical device.
@@ -57,5 +57,5 @@ Located in the ```app/com/example/artmind/component``` folder for the user inter
 ## JAVADOC
 ```/javadoc/index.html```
 
-## APK File
+## APK
 Use Android Studio to build the final version of the ArtMind application. Then, select the "Build" menu and choose the "Build Bundle(s) / APK(s)" option. Lastly, opt for the "Build APK(s)" selection to generate the APK file for deployment.
