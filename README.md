@@ -54,8 +54,8 @@ XML files in the ```res/layout``` folder for the user interface.
 ### Controllers
 Located in the ```app/com/example/artmind/component``` folder for the user interface.
 
-## APK File
-```app/build/outputs/apk/debug/app-debug.apk```
-
 ## JAVADOC
 ```/javadoc/index.html```
+
+## APK File
+Use Android Studio to build the final version of the ArtMind application. Then, select the "Build" menu and choose the "Build Bundle(s) / APK(s)" option. Lastly, opt for the "Build APK(s)" selection to generate the APK file for deployment.
