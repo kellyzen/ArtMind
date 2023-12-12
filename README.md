@@ -54,5 +54,8 @@ XML files in the ```res/layout``` folder for the user interface.
 ### Controllers
 Located in the ```app/com/example/artmind/component``` folder for the user interface.
 
+## APK File
+```app/build/outputs/apk/debug/app-debug.apk```
+
 ## JAVADOC
 ```/javadoc/index.html```
